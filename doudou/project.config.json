@@ -1,0 +1,18 @@
+{
+	"description": "A WePY project",
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": true,
+		"minified": false,
+		"newFeature": true,
+		"nodeModules": false,
+		"autoAudits": false,
+		"uglifyFileName": true
+	},
+	"compileType": "miniprogram",
+	"appid": "wx6ecab4e80a147160",
+	"projectname": "doudou",
+	"miniprogramRoot": "dist/",
+	"condition": {}
+}

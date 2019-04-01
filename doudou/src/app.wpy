@@ -1,0 +1,101 @@
+<style lang="less">
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/homePage',
+      'pages/two',
+      'pages/myMessage'
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#ffffff',
+      navigationBarTitleText: '兜兜熊i小熊',
+      navigationBarTextStyle: 'black',
+      backgroundColor: '#eeeeee'
+    },
+    tabBar: {
+      color: '#7A7E83',
+      selectedColor: 'blue',
+      borderStyle: 'black',
+      backgroundColor: '#ffffff',
+      list: [{
+        pagePath: 'pages/homePage',
+        iconPath: 'images/LOG.jpg',
+        selectedIconPath: 'images/LOG.jpg',
+        text: '首页'
+      }, {
+        pagePath: 'pages/two',
+        iconPath: 'images/LOG.jpg',
+        selectedIconPath: 'images/LOG.jpg',
+        text: '分包页面资源'
+      }, {
+        pagePath: 'pages/myMessage',
+        iconPath: 'images/LOG.jpg',
+        selectedIconPath: 'images/LOG.jpg',
+        text: '我的信息'
+      }]
+    },
+    subPackages: [
+      {
+        root: 'components/pagesB',
+        pages: [
+          'pages/demo/demo'
+        ]
+      }
+    ]
+  }
+
+  globalData = {
+    userInfo: null
+  }
+
+  constructor () {
+    super()
+    this.use('requestfix')
+  }
+
+  onLaunch() {
+    this.testAsync()
+  }
+
+  sleep (s) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('promise resolved')
+      }, s * 1000)
+    })
+  }
+
+  async testAsync () {
+    const data = await this.sleep(3)
+    console.log(data)
+  }
+
+  getUserInfo(cb) {
+    const that = this
+    if (this.globalData.userInfo) {
+      return this.globalData.userInfo
+    }
+    wepy.getUserInfo({
+      success (res) {
+        that.globalData.userInfo = res.userInfo
+        cb && cb(res.userInfo)
+      }
+    })
+  }
+}
+</script>
