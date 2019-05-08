@@ -1,63 +1,67 @@
 <style lang="less">
-  page{
-    width: 100%;
-    height: 100%;
-  }
-  .conter{
-    width: 100%;
-    height: 100%;
-  }
-  .slide-image{
-    width: 100%;
-  }
-  .list-con{
-    background: #ffffff;
-    width: 100%;
-    border-radius: 50% 50% 0 0;
-    position: relative;
-    height: 70rpx;
-    bottom: 20rpx;
-  }
-  .list-icon{
-    width:25%;
-    float:left;
-    text-align:center;
-  }
-  .list-icon-on{
-    height:100rpx;
-    border-bottom:1rpx solid red;
-    width:90%;
-    margin:0 auto;
-  }
-  .icon-image{
-    width: 100rpx;
-    height: 100rpx;
-  }
-  .arrow{
-    width: 50rpx;
-    height: 50rpx;
-    vertical-align: middle;
-  }
-  .list-tab{
-    float: left;
-  }
-  .tab{
-    width:90%;
-    height: 90rpx;
-    margin:10rpx auto;
-  }
-  .weekShow{
-    width:40%;
-    height:50px;
-    float:left;
-    text-align:center;
-    background:black;
-    margin:0 5%;
-  }
-  .weekShow image{
-    width:100%;
-    height:100%;
-  }
+page {
+  width: 100%;
+  height: 100%;
+}
+.conter {
+  width: 100%;
+  height: 100%;
+}
+.slide-image {
+  width: 100%;
+}
+// .list-con {
+//   background: #ffffff;
+//   width: 100%;
+//   border-radius: 50% 50% 0 0;
+//   position: relative;
+//   height: 70rpx;
+//   bottom: 20rpx;
+// }
+.list-icon {
+  width: 25%;
+  float: left;
+  text-align: center;
+}
+.list-icon-on {
+  background: #F6F6F6;
+  height: 80rpx;
+  border-bottom: 1rpx solid #e2e2e2;
+  margin: 0rpx auto;
+  padding:20rpx;
+}
+.icon-image {
+  width: 80rpx;
+  height: 80rpx;
+}
+.arrow {
+  width: 50rpx;
+  height: 50rpx;
+  vertical-align: middle;
+}
+.list-tab {
+  float: left;
+}
+.tab {
+  width: 90%;
+  height: 90rpx;
+  margin: 10rpx auto;
+}
+.weekShow {
+  width: 40%;
+  height: 50px;
+  float: left;
+  text-align: center;
+  background: black;
+  margin: 0 5%;
+}
+.weekShow image {
+  width: 100%;
+  height: 100%;
+}
+.limited-time{
+  
+}
 </style>
 
 
@@ -65,99 +69,161 @@
   <view class="conter">
     <!-- 轮播图 -->
     <view>
-      <swiper
-      indicator-dots="{{indicatorDots}}"
-      autoplay="{{autoplay}}"
-      interval="{{interval}}"
-      duration="{{duration}}"
-      circular="{{circular}}">
-      <block wx:for="{{imgUrls}}">
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
+        <repeat for="{{imgUrls}}" key="index" index="index" item="item">
           <swiper-item>
-          <image src="{{item}}" class="slide-image" width="355" height="150" />
+            <image @tap="plus({{index}})" src="{{item}}" class="slide-image" width="355" height="150" />
           </swiper-item>
-      </block>
+        </repeat>
       </swiper>
     </view>
-    
-    <view class="list-con"></view>
-    
+    <!-- 圆角 -->
+    <!-- <view class="list-con"></view> -->
     <!-- 导航条 -->
-    <view>
+    <view style="height:170px">
       <view class="list-icon-on">
-        <view class="list-icon">
-          <image class="icon-image" src="../images/LOG.jpg"></image>
-        </view>
-        <view class="list-icon">
-          <image class="icon-image" src="../images/LOG.jpg"></image>
-        </view>
-        <view class="list-icon">
-          <image class="icon-image" src="../images/LOG.jpg"></image>
-        </view>
-        <view class="list-icon">
-          <image class="icon-image" src="../images/LOG.jpg"></image>
-        </view>
+        <repeat for="{{lists}}" key="index" index="index" item="item">
+          <view class="list-icon">
+            <image class="icon-image" src="{{item}}"></image>
+          </view>
+        </repeat>
       </view>
-
+      
       <!-- 列表 -->
       <view>
         <view class="tab">
-          <view class="list-tab">
-            <text>每周上新！换换口味</text>
-            <image class="arrow" src='../images/LOG.jpg'></image>
-          </view>
-          <view class="list-tab">
-            <text>更多</text>
-            <image class="arrow" src='../images/LOG.jpg'></image>
-          </view>
-        </view>
-
-        <view class="tab">
           <view class="weekShow">
             <image src='{{imgUrls[0]}}'></image>
-
-            11
+            最新活动
           </view>
           <view class="weekShow">
-            <image src='{{imgUrls[0]}}'></image>
-
-            22
+            <image src='{{imgUrls[1]}}'></image>
+            最新特价
           </view>
         </view>
-
       </view>
-
     </view>
 
+    <view class="limited-time">
+      <view>账上秒杀1</view>
+      <view @tap="scanCode">扫一扫</view>
+      <view @tap="call">{{phono}}</view>
+    </view>
+    <!-- 组件调用-测试 -->
+    <goodsList></goodsList>
+
+    <child>
+      <view slot="title">
+       {{num}}
+      </view>
+       <view slot="name">
+        {{num+2}}
+      </view>
+    </child>
+
+    <child1 title="1">{{title}}</child1>
   </view>
 </template>
 
 <script>
-  import wepy from 'wepy'
-  import List from '../components/list'
-  
-  export default class Index extends wepy.page {
-    config = {
-      navigationBarTitleText: '兜兜熊i小熊',
-      backgroundColor: '#ffffff',
-      navigationStyle: 'custom'
-    }
-    components = {
-      list: List
-    }
-    data = {
-      imgUrls: [
-        '../images/1.jpg',
-        '../images/2.jpg',
-        '../images/3.jpg'
-      ],
-      indicatorDots: false,
-      autoplay: true,
-      circular: true,
-      interval: 1500,
-      duration: 1000
-    };
-    methods = {
+import wepy from 'wepy'
+import service from '../service/index'
+import List from '../components/list'
+import goodsList from '../components/goodsList'
+import child from '../components/child'
 
+export default class homePage extends wepy.page {
+  config = {
+    navigationBarTitleText: '兜兜熊i小熊',
+    backgroundColor: '#ffffff',
+    navigationStyle: 'custom'
+  };
+  components = {
+    list: List,
+    child: child,
+    child1: child,
+    goodsList
+  };
+  data = {
+    imgUrls: ['../images/1.jpg', '../images/2.jpg', '../images/3.jpg'],
+    lists: [
+      '../images/log1.jpg',
+      '../images/log2.jpg',
+      '../images/log3.jpg',
+      '../images/log4.jpg'
+    ],
+    indicatorDots: true,
+    autoplay: true,
+    circular: true,
+    interval: 1500,
+    duration: 1000,
+    num: 0,
+    phono: '13888888888'
+  };
+  methods = {
+    // 轮播图点击
+    plus(index) {
+      console.log(index)
+      wepy.navigateTo({
+        url: './navigation'
+      })
+      // 小程序提示框
+      // wx.showToast({
+      //   title: '成功',
+      //   icon: 'success',
+      //   duration: 2000
+      // })
+      // wx.showModal({
+      //   title: '提示',
+      //   content: '这是一个模态弹窗',
+      //   success(res) {
+      //     if (res.confirm) {
+      //       console.log('用户点击确定')
+      //     } else if (res.cancel) {
+      //       console.log('用户点击取消')
+      //     }
+      //   }
+      // })
+    },
+    // 拨打电话
+    call() {
+      wepy.makePhoneCall({
+        phoneNumber: this.phono
+      })
+    },
+    scanCode() {
+      wepy.scanCode({
+        success: (res) => {
+          console.log('扫码结果')
+          console.log(res)
+        }
+      })
     }
+  };
+  // watch监听
+  watch = {
+    num(newValue, oldValue) {
+      // console.log(`num value: ${oldValue} -> ${newValue}`)
+    }
+  };
+  onLoad() {
+    setInterval(() => {
+      // this.num++
+      this.$apply()
+    }, 1000)
   }
+  onShow() {
+    this.getCategory()
+    // await wepy.login()
+    // this.userInfo = await wepy.getUserInfo()
+  }
+  getCategory() {
+    service.getDemo({name: 'aaa'}).then(res => {
+      console.log(res)
+    })
+  }
+  async doIt() {
+    // const do1 = await this
+  }
+}
 </script>
