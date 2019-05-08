@@ -1,0 +1,62 @@
+<style lang="less">
+  page {
+    width: 100%;
+    height: 100%;
+  }
+  #myMap {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+<template>
+  <button wx:if="{{showFlag}}" open-type="openSetting" bindopensetting="handler">去设置</button>
+  <map id='myMap' longitude="{{longitude}}" latitude="{{latitude}}" show-location scale="15">
+    <cover-view>1</cover-view>
+  </map>
+</template>
+<script>
+  import wepy from 'wepy'
+  export default class test extends wepy.page {
+    config = {
+      navigationBarTitleText: '兜兜熊i小熊',
+      backgroundColor: '#ffffff'
+    }
+    data = {
+      showFlag: false
+    };
+    onShow() {
+      this.mapCtx = wepy.createMapContext('myMap')
+      this.getCenterLocation()
+    }
+    getCenterLocation() {
+      var that = this
+      wx.getLocation({
+        type: 'wgs84',
+        success: function(res) {
+          console.log(res)
+          that.setData({
+            latitude: res.latitude,
+            longitude: res.longitude
+          })
+        },
+        fail: function () {
+          wx.hideToast()
+          console.log(1)
+        }
+      })
+    }
+    getFail() {
+      var that = this
+      wx.getLocation({
+        type: 'wgs84',
+        success: function(res) {
+          console.log(res)
+          that.setData({
+            latitude: res.latitude,
+            longitude: res.longitude
+          })
+        }
+      })
+    }
+  }
+</script>

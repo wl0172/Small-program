@@ -1,10 +1,10 @@
 <style lang="less">
-  page{
-    width:100%;
+  page {
+    width: 100%;
     height: 100%;
   }
-  .container{
-    width:100%;
+  .container {
+    width: 100%;
     height: 100%;
   }
   .userinfo {
@@ -12,101 +12,92 @@
     flex-direction: column;
     align-items: center;
   }
-
   .userinfo-avatar {
     width: 80rpx;
     height: 80rpx;
     border-radius: 50%;
   }
-
   .userinfo-nickname {
     color: #aaa;
   }
-  .tanChuang{
+  .tanChuang {
     position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
     background: white;
-    text-align:center;
+    text-align: center;
+    background: black;
+    opacity: 0.5;
   }
-  .tanChuang image{
-    width:400rpx;
-    height:225rpx;
+  .tanChuang image {
+    width: 400rpx;
+    height: 225rpx;
   }
-  .fixed-button-view-bottom{
+  .fixed-button-view-bottom {
     position: relative;
     top: 500rpx;
-    width:50%;
+    left: 0rpx;
+    width: 30%;
+    font-size: 70%;
+    background: #81D741;
   }
 </style>
 <template>
   <view class="container">
     <!-- 弹窗 -->
-    <view class="tanChuang" wx:if="{{show}}" >
-      <image src="../images/gif.gif"></image>
+    <view class="tanChuang" wx:if="{{show}}">
       <button class="fixed-button-view-bottom" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">点击授权</button>
     </view>
-
+    <!-- 头像 -->
     <view>
       <view class="userinfo" @tap="handleViewTap">
-        <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
+        <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover" />
         <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
       </view>
     </view>
-  
     <!-- <button open-type='share'>分享</button> -->
-
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-
-  export default class Index extends wepy.page {
+  export default class myMessage extends wepy.page {
     config = {
       navigationBarTitleText: '授权登录'
     }
-
     data = {
       obj: '',
       userInfo: {
         nickName: '加载中...'
       },
-      show: true
+      show: false
     }
-
     methods = {
       // 获取用户基本信息-头像-昵称
       onGotUserInfo(e) {
-        // console.log(e)
-        // console.log(e.detail.errMsg)
-        // console.log(e.detail.userInfo)
-        // console.log(e.detail.rawData)
-        this.show = false
-        var obj = e.detail.rawData
-        this.obj = JSON.parse(obj)
-        this.userInfo.nickName = this.obj.nickName
-        this.userInfo.avatarUrl = this.obj.avatarUrl
+        if (e.detail !== undefined) {
+          wepy.setStorageSync('userInfo', e.detail)
+          this.show = false
+
+          this.userInfo.avatarUrl = e.detail.userInfo.avatarUrl
+          this.userInfo.nickName = e.detail.userInfo.nickName
+
+          this.$apply()
+        }
       }
     }
-
     onShow() {
-      let self = this
-      this.$parent.getUserInfo(function (userInfo) {
-        if (userInfo) {
-          self.userInfo = userInfo
-        }
-
-        if (self.userInfo.nickName !== '') {
-          setTimeout(() => {
-            self.show = false
-            self.$apply()
-          }, 10)
-        }
-
-        self.$apply()
-      })
+      // 获取缓存，判断是否授权
+      let userInfo = wepy.getStorageSync('userInfo') || undefined
+      if (userInfo) {
+        this.show = false
+        this.userInfo.avatarUrl = userInfo.userInfo.avatarUrl
+        this.userInfo.nickName = userInfo.userInfo.nickName
+      } else {
+        this.show = true
+      }
+      this.$apply()
     }
   }
 </script>

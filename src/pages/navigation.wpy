@@ -1,0 +1,76 @@
+<style lang="less">
+/*自定义底部导航  */
+.footer {
+  height:90rpx;
+  width:100%;
+  position: fixed;
+  bottom:0;
+  left:0;
+  border-top:1px solid #ddd;
+}
+.footer_list{
+  width:17%;
+  height:100%;
+  text-align:center;
+  padding-top:8rpx;
+  margin-left:60rpx;
+  margin-right:62rpx;
+}
+.footer_lists{
+  float:left;
+  width: 33.3%;
+  text-align: center;
+}
+.footer-image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.footer-text{
+  font-size: 22rpx;
+}
+/*底部导航  */
+</style>
+
+<template>
+  <view class='footer'>
+    <repeat class='footer_list' for="{{listInfo}}" key="index" index="index" item="item" >
+      <view class="footer_lists">
+        <image class="footer-image"  src="{{item.imgUrl}}" @tap="chooseImg"></image>
+        <image class="footer-image" wx:if="{{show}}" src="{{item.curUrl}}" @tap="chooseImg"></image>
+        <view class="footer-text">{{item.title}}</view>
+      </view>
+    </repeat>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class navigation extends wepy.page {
+  data = {
+    show: false,
+    curIdx: 0,
+    listInfo: [
+      {
+        title: '首页',
+        imgUrl: '../images/log1.jpg',
+        curUrl: '../images/log1.jpg'
+      },
+      {
+        title: '兼职入口',
+        imgUrl: '../images/log1.jpg',
+        curUrl: '../images/log1.jpg'
+      },
+      {
+        title: '个人中心',
+        imgUrl: '../images/log1.jpg',
+        curUrl: '../images/log1.jpg'
+      }
+    ]
+  }
+  methods = {
+    chooseImg(e) {
+      console.log(e)
+    }
+  }
+}
+</script>
