@@ -1,0 +1,38 @@
+<style lang="less">
+
+</style>
+
+<template>
+  <view>
+    11111111111111111111
+
+    <button @tap="okok">okok</button>
+  </view>
+  
+</template>
+
+<script>
+  import wepy from 'wepy'
+  // import List from '../components/pagesB/pages/demo/demo'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '兜兜熊i小熊',
+      backgroundColor: '#ffffff'
+    }
+    components = {
+      // List: List
+    }
+    methods = {
+      okok() {
+        wepy.navigateTo({
+          url: '../components/pagesB/pages/demo/demo'
+        })
+      }
+    }
+  }
+</script>
+
+<style>
+
+</style>

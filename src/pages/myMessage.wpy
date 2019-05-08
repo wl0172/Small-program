@@ -1,0 +1,112 @@
+<style lang="less">
+  page{
+    width:100%;
+    height: 100%;
+  }
+  .container{
+    width:100%;
+    height: 100%;
+  }
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+  .tanChuang{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    text-align:center;
+  }
+  .tanChuang image{
+    width:400rpx;
+    height:225rpx;
+  }
+  .fixed-button-view-bottom{
+    position: relative;
+    top: 500rpx;
+    width:50%;
+  }
+</style>
+<template>
+  <view class="container">
+    <!-- 弹窗 -->
+    <view class="tanChuang" wx:if="{{show}}" >
+      <image src="../images/gif.gif"></image>
+      <button class="fixed-button-view-bottom" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">点击授权</button>
+    </view>
+
+    <view>
+      <view class="userinfo" @tap="handleViewTap">
+        <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
+        <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+      </view>
+    </view>
+  
+    <!-- <button open-type='share'>分享</button> -->
+
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '授权登录'
+    }
+
+    data = {
+      obj: '',
+      userInfo: {
+        nickName: '加载中...'
+      },
+      show: true
+    }
+
+    methods = {
+      // 获取用户基本信息-头像-昵称
+      onGotUserInfo(e) {
+        // console.log(e)
+        // console.log(e.detail.errMsg)
+        // console.log(e.detail.userInfo)
+        // console.log(e.detail.rawData)
+        this.show = false
+        var obj = e.detail.rawData
+        this.obj = JSON.parse(obj)
+        this.userInfo.nickName = this.obj.nickName
+        this.userInfo.avatarUrl = this.obj.avatarUrl
+      }
+    }
+
+    onShow() {
+      let self = this
+      this.$parent.getUserInfo(function (userInfo) {
+        if (userInfo) {
+          self.userInfo = userInfo
+        }
+
+        if (self.userInfo.nickName !== '') {
+          setTimeout(() => {
+            self.show = false
+            self.$apply()
+          }, 10)
+        }
+
+        self.$apply()
+      })
+    }
+  }
+</script>
