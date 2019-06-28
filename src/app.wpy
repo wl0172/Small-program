@@ -1,113 +1,85 @@
 <style lang="less">
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
+  page {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+  }
+  .body{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #ffffff;
+  }
 </style>
 
 <script>
-import wepy from 'wepy'
-import 'wepy-async-function'
-
-export default class extends wepy.app {
-  config = {
-    pages: [
-      'pages/map',
-      'pages/homePage',
-      'pages/load',
-      'pages/myMessage',
-      'pages/navigation'
-    ],
-    window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#ffffff',
-      navigationBarTitleText: '兜兜熊i小熊',
-      navigationBarTextStyle: 'black',
-      backgroundColor: '#eeeeee'
-    },
-    tabBar: {
-      color: '#7A7E83',
-      selectedColor: 'blue',
-      borderStyle: 'black',
-      backgroundColor: '#ffffff',
-      list: [{
-        pagePath: 'pages/homePage',
-        iconPath: 'images/log1.jpg',
-        selectedIconPath: 'images/log1.jpg',
-        text: '首页'
-      }, {
-        pagePath: 'pages/load',
-        iconPath: 'images/log2.jpg',
-        selectedIconPath: 'images/log2.jpg',
-        text: '页面分包资源测试'
-      }, {
-        pagePath: 'pages/map',
-        iconPath: 'images/log3.jpg',
-        selectedIconPath: 'images/log3.jpg',
-        text: '地图'
-      }, {
-        pagePath: 'pages/myMessage',
-        iconPath: 'images/log4.jpg',
-        selectedIconPath: 'images/log4.jpg',
-        text: '我的信息'
-      }]
-    },
-    subPackages: [
-      {
+  import wepy from 'wepy'
+  export default class extends wepy.app {
+    config = {
+      pages: [
+        'pages/index',
+        'pages/map',
+        'pages/homePage',
+        'pages/load',
+        'pages/myMessage',
+        'pages/navigation'
+      ],
+      window: {
+        backgroundTextStyle: 'light',
+        navigationBarBackgroundColor: '#ffffff',
+        navigationBarTitleText: '兜兜熊i小熊',
+        navigationBarTextStyle: 'black',
+        backgroundColor: '#eeeeee'
+      },
+      tabBar: {
+        color: '#7A7E83',
+        selectedColor: 'blue',
+        borderStyle: 'black',
+        backgroundColor: '#ffffff',
+        list: [{
+          pagePath: 'pages/homePage',
+          iconPath: 'images/log1.jpg',
+          selectedIconPath: 'images/log1.jpg',
+          text: '首页'
+        }, {
+          pagePath: 'pages/load',
+          iconPath: 'images/log2.jpg',
+          selectedIconPath: 'images/log2.jpg',
+          text: '页面分包资源测试'
+        }, {
+          pagePath: 'pages/map',
+          iconPath: 'images/log3.jpg',
+          selectedIconPath: 'images/log3.jpg',
+          text: '地图'
+        }, {
+          pagePath: 'pages/myMessage',
+          iconPath: 'images/log4.jpg',
+          selectedIconPath: 'images/log4.jpg',
+          text: '我的信息'
+        }]
+      },
+      subPackages: [{
         root: 'components/pagesB',
         pages: [
           'pages/demo/demo'
         ]
-      }
-    ],
-    permission: {
-      'scope.userLocation': {'desc': '你的位置信息将用于小程序位置接口的效果展示'
+      }],
+      permission: {
+        'scope.userLocation': {
+          'desc': '你的位置信息将用于小程序位置接口的效果展示'
+        }
       }
     }
-  }
-
-  globalData = {
-    userInfo: null
-  }
-
-  constructor () {
-    super()
-    this.use('requestfix')
-    this.use('promisify')
-  }
-
-  onLaunch() {
-    this.testAsync()
-  }
-
-  sleep (s) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('promise resolved')
-      }, s * 1000)
-    })
-  }
-
-  async testAsync () {
-    const data = await this.sleep(3)
-    console.log(data)
-  }
-
-  getUserInfo(cb) {
-    const that = this
-    if (this.globalData.userInfo) {
-      return this.globalData.userInfo
+    globalData = {
+      userInfo: null
     }
-    wepy.getUserInfo({
-      success (res) {
-        that.globalData.userInfo = res.userInfo
-        cb && cb(res.userInfo)
-      }
-    })
+    constructor() {
+      super()
+      this.use('requestfix')
+      this.use('promisify')
+    }
+    onLaunch() {
+      this.testAsync()
+    }
   }
-}
 </script>
