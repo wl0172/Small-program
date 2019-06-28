@@ -11,7 +11,7 @@
 
 <script>
   import wepy from 'wepy'
-  export default class homePage extends wepy.page {
+  export default class index extends wepy.page {
     config = {
       navigationBarTitleText: '兜兜熊i小熊',
       backgroundColor: '#ffffff'

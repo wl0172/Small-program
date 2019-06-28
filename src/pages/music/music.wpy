@@ -5,13 +5,13 @@
 
 <template>
   <view class="body">
-    分包页面
+    音乐
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-  export default class demo extends wepy.page {
+  export default class music extends wepy.page {
     config = {
       navigationBarTitleText: '兜兜熊i小熊',
       backgroundColor: '#ffffff'

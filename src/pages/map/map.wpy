@@ -1,22 +1,17 @@
 <style lang="less">
-  page {
-    width: 100%;
-    height: 100%;
-  }
   #myMap {
     width: 100%;
     height: 100%;
   }
 </style>
 <template>
-  <button wx:if="{{showFlag}}" open-type="openSetting" bindopensetting="handler">去设置</button>
-  <map id='myMap' longitude="{{longitude}}" latitude="{{latitude}}" show-location scale="15">
-    <cover-view>1</cover-view>
-  </map>
+  <view class="body">
+
+  </view>
 </template>
 <script>
   import wepy from 'wepy'
-  export default class test extends wepy.page {
+  export default class map extends wepy.page {
     config = {
       navigationBarTitleText: '兜兜熊i小熊',
       backgroundColor: '#ffffff'
@@ -39,7 +34,7 @@
             longitude: res.longitude
           })
         },
-        fail: function () {
+        fail: function() {
           wx.hideToast()
           console.log(1)
         }

@@ -5,13 +5,14 @@
 
 <template>
   <view class="body">
-    分包页面
+    测试
+    <button @tap="button">打开授权设置页</button>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-  export default class demo extends wepy.page {
+  export default class Demo extends wepy.page {
     config = {
       navigationBarTitleText: '兜兜熊i小熊',
       backgroundColor: '#ffffff'
@@ -19,13 +20,16 @@
     };
     components = {};
     data = {};
-    methods = {};
-    // watch监听
-    watch = {
+    methods = {
+      button() {
+        wepy.navigateTo({
+          url: '../pagesA/pages/demo/demo'
+        })
+      }
     };
-    onLoad() {
-    }
-    onShow() {
-    }
+    // watch监听
+    watch = {};
+    onLoad() {}
+    onShow() {}
   }
 </script>
