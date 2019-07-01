@@ -1,0 +1,164 @@
+<style lang="less">
+  page {
+    background: #FFFFFF;
+  }
+  body {
+    width: 100%;
+    height: 100%;
+  }
+  .headers {
+    display: flex;
+    width: 100%;
+    color: #333333;
+    font-size: 28rpx;
+    border-bottom: 1px solid #E5E5E5;
+    height: 88rpx;
+    line-height: 3;
+  }
+  .header {
+    text-align: center;
+    flex: 1;
+  }
+  .listImage {
+    position: relative;
+    border-bottom: 1px solid #E5E5E5;
+    width: 690rpx;
+    margin: 0 auto;
+    padding: 30rpx 0 10rpx 0;
+  }
+  .listImage image {
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 10rpx;
+  }
+  .listT {
+    position: absolute;
+    top: 30rpx;
+    left: 210rpx;
+    font-size: 32rpx;
+  }
+  .listText {
+    margin: 0rpx 0 18rpx 0;
+  }
+  .listTitle {
+    font-size: 24rpx;
+  }
+  // 没有收藏
+  .noCollection {
+    width: 100%;
+    margin: 32% auto;
+    text-align: center;
+  }
+  .noCollection image {
+    width: 80rpx;
+    height: 68rpx;
+  }
+  .toDiscover {
+    width: 198rpx;
+    height: 60rpx;
+    font-size: 30rpx;
+    margin-top: 40rpx;
+    border: 1rpx solid #FF6600;
+    outline: none;
+    border-radius: 30rpx;
+    color: #FF6600;
+    line-height: 2;
+    background-color: #FFFFFF;
+  }
+  .text {
+    color: #999999;
+    font-size: 14px;
+    margin-top: 20rpx;
+  }
+</style>
+
+<template>
+  <view class="body">
+    <!-- header -->
+    <view class="headers">
+      <view class="header" @tap="collection">收藏（{{index}}）</view>
+      <view class="header" @tap="browse">浏览（{{index}}）</view>
+    </view>
+    <view class="noCollection" wx:if="{{textHidden}}">
+      <image src="../images/love-icon.png" style="margin:0 auto" />
+      <view class="text">还没有收藏内容</view>
+      <button class="toDiscover" @tap="toDiscover">去发现</button>
+    </view>
+    <scroll-view scroll-y style="height: {{scroll_view_height}}rpx" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
+      <!-- {{state==index?'active-tag':''}}" wx:for="{{dates}}" data-key='{{index}}' -->
+      <view class="listImage" wx:if="{{hiddenName}}" @tap="hotelList">
+        <image src="../images/position-icon.png" />
+        <view class="listT">
+          <view class="listText">艾尚酒店(上海火车站店)</view>
+          <view class="listText listTitle">暂无点评数据</view>
+          <view class="listText listTitle">高档型 | 2016年装修</view>
+          <view class="listText listTitle">静安区 上海火车站</view>
+        </view>
+      </view>
+      <view class="listImage" wx:if="{{hiddenName}}">
+        <image src="../images/position-icon.png" />
+        <view class="listT">
+          <view class="listText">艾尚酒店(上海火车站店)</view>
+          <view class="listText listTitle">暂无点评数据</view>
+          <view class="listText listTitle">高档型 | 2016年装修</view>
+          <view class="listText listTitle">静安区 上海火车站</view>
+        </view>
+      </view>
+    </scroll-view>
+
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import {
+    getSysHeight,
+    changePXToRPX
+  } from '../lib/wx-system.js'
+  export default class collection extends wepy.page {
+    config = {
+      navigationBarTitleText: '全球家'
+    };
+    data = {
+      index: '1',
+      indexNum: '1',
+      hiddenName: false,
+      textHidden: true,
+      state: '',
+      scroll_view_height: '',
+    };
+    computed = {};
+    methods = {
+      // 酒店列表点击
+      hotelList() {
+        wepy.navigateTo({
+          url: './hotelDetail'
+        })
+      },
+      // 收藏
+      collection() {
+        console.log(1)
+        this.hiddenName = false
+        this.textHidden = true
+      },
+      // 浏览
+      browse() {
+        console.log(2)
+        this.hiddenName = true
+        this.textHidden = false
+      },
+      // 去发现
+      toDiscover() {
+        wepy.navigateTo({
+          url: './searchList'
+        })
+      }
+    };
+    onLoad() {
+      this.scroll_view_height = changePXToRPX(getSysHeight()) - 88
+    }
+    onShow() {}
+    onHide() {}
+    onUnload() {}
+  }
+</script>

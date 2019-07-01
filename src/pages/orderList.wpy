@@ -1,0 +1,230 @@
+<style lang="less">
+  page {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+  }
+  .view-fenge{
+    height: 20rpx;
+    background: #F5F5F5;
+  }
+  .view-header {
+    width: 100%;
+    height: 88rpx;
+    display: flex;
+    color: #333333;
+    font-size: 26rpx;
+    line-height: 88rpx;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2rpx solid #E5E5E5;
+  }
+  .view-header-list {
+    margin: 0 22rpx;
+    width: 92rpx;
+    height:100%;
+    text-align: center;
+    box-sizing:border-box;
+  }
+  .tab {
+    border-bottom: 4rpx solid #FA8C1D;
+  }
+  //  内容-标题
+  .view-conter-title{
+    height: 90rpx;
+    line-height: 90rpx;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    padding: 0 30rpx;
+    color:#333333;
+  }
+  .view-conter-global{
+    display: flex;
+    align-items:center;
+  }
+  .view-conter-title-icon{
+    width: 30rpx;
+    height: 30rpx;
+  }
+  .shuxian{
+    width: 2rpx;
+    height: 20rpx;
+    background: #DDDDDD;
+    margin: 0 20rpx;
+  }
+  .view-conter-Pay{
+    position: absolute;
+    right: 30rpx;
+  }
+  .view-conter-global-text{
+    font-weight:600;
+  }
+  // 内容-内容
+  .view-conter{
+    height: 146rpx;
+    display: flex;
+    padding: 22rpx 32rpx;
+    background: #F5F5F5;
+    align-items: center;
+  }
+  .view-conter-image{
+    width: 146rpx;
+    height: 146rpx;
+    background: red;
+  }
+  .view-conter-text{
+    height: 100%;
+    margin: 0 0 0 22rpx;
+  }
+  .view-conter-text-title{
+    font-weight:400;
+    font-size: 26rpx;
+    color: #333333;
+    width: 520rpx;
+    height: 72rpx;
+    overflow: hidden;
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
+  }
+  .view-conter-text-date{
+    color: #666666;
+    font-size: 24rpx;
+  }
+  .view-conter-money{
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+  }
+  .view-conter-money-Total{
+    color: #333333;
+    font-size: 24rpx;
+  }
+  .icon{
+    color: #FF6600;
+    font-size: 20rpx;
+  }
+  .view-conter-money-text{
+    color: #FF6600;
+    font-size: 34rpx;
+  }
+  // footer
+  .view-footer{
+    height: 90rpx;
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+    justify-content:flex-end;
+  }
+  .view-footer-button-left{
+    color: #333333;
+    width: 160rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    border-radius: 26rpx;
+    border: 2rpx solid #DDDDDD;
+  }
+  .view-footer-button-right{
+    color: #ffffff;
+    border: 0;
+    width: 104rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    border-radius: 26rpx;
+    margin: 0 30rpx 0 20rpx;
+    background:linear-gradient(90deg,rgba(250,140,29,1) 0%,rgba(252,173,62,1) 100%);
+  }
+</style>
+<template>
+  <view class="body">
+    <!-- tab -->
+    <view class="view-header">
+      <view class="view-header-list {{state==true?'tab':''}}" @tap="Conduct">进行中</view>
+      <view class="view-header-list {{states==false?'tab':''}}" @tap="End">已结束</view>
+    </view>
+    <!-- conter-state -->
+    <view>
+      <!-- title -->
+      <view class="view-conter-title">
+        <!-- 全球家name -->
+        <view class="view-conter-global">
+          <view class="view-conter-title-icon" style="margin-right:10rpx;">
+            <image src="../images/map-Hotellocation.png" style="width:100%;height:100%;"></image>
+          </view>
+          <view>全球家</view>
+        </view>
+        <!-- 竖线 -->
+        <view class="shuxian"></view>
+        <!-- 酒店name -->
+        <view class="view-conter-global">
+          <view class="view-conter-global-text">上海海昌海洋公园主题度假酒店</view>
+          <view class="view-conter-title-icon" style="margin-left:10rpx;width:20rpx;height:20rpx;">
+            <image src="../images/arrow-right-icon.png" style="width:100%;height:100%;"></image>
+          </view>
+        </view>
+        <!-- 付款类型 -->
+        <view class="view-conter-Pay">待付款</view>
+      </view>
+      <!-- conter -->
+      <view class="view-conter" @tap="orderDetails">
+        <!-- 图 -->
+        <view class="view-conter-image">
+          <image src="../images/index-selected-icon.png" style="width:100%;height:100%;"></image>
+        </view>
+        <!-- 标题 -->
+        <view class="view-conter-text">
+          <view class="view-conter-text-title">【直采】海葵鱼高级双床房&#91无早](限量特惠、亲子套餐)</view>
+          <view class="view-conter-text-date">08月15日 - 08月17日 共2晚</view>
+          <view class="view-conter-money">
+            <view class="view-conter-money-Total">合计：</view>
+            <view class="icon">￥</view>
+            <view class="view-conter-money-text">3218</view>
+          </view>
+        </view>
+      </view>
+      <!-- footer -->
+      <view class="view-footer">
+        <view class="view-footer-button-left">再次预定</view>
+
+        <view wx:if="{{buttonShow}}" class="view-footer-button-right">付款</view>
+      </view>
+      <!-- 分割线 -->
+      <view class="view-fenge"></view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  export default class orderList extends wepy.page {
+    config = {
+      navigationBarTitleText: '订单列表'
+    }
+    components = {};
+    data = {
+      buttonShow: true,
+      state: true,
+      states: true,
+    }
+    methods = {
+      // 订单详情
+      orderDetails() {
+        wepy.navigateTo({
+          url: './orderDetails'
+        })
+      },
+      // 进行中
+      Conduct() {
+        this.state = true
+        this.states = true
+      },
+      // 已结束
+      End() {
+        this.state = false
+        this.states = false
+      }
+    }
+    onShow() {}
+  }
+</script>

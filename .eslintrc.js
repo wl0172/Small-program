@@ -1,6 +1,9 @@
 module.exports = {
   root: true,
-  globals: { wx: true },
+  globals: {
+    wx: true,
+    __NODE_ENV__:true
+  },
   parser: 'babel-eslint',
   parserOptions: {
     sourceType: 'module'
@@ -12,6 +15,7 @@ module.exports = {
   extends: 'standard',
   // required to lint *.wpy files
   plugins: [
+    'vue',
     'html'
   ],
   settings: {

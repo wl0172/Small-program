@@ -1,12 +1,172 @@
 <style lang="less">
-
+  .body {
+    background-color: #ffffff;
+  } // 轮播图
+  .top-swiper-view {
+    width: 100%;
+    height: 360rpx;
+  }
+  .top-swiper {
+    width: 100%;
+    height: 100%;
+  } // 入住-离店日期
+  .default-label-view {
+    width: 100%;
+  }
+  .flex-label-view {
+    display: flex;
+    width: 670rpx;
+    height: 86rpx;
+    padding:15rpx 0;
+    align-items:center;
+    margin: 0rpx auto 0px auto;
+    justify-content: space-between;
+    border-bottom: 2rpx solid #EAEAEA;
+  }
+  .flex-item-left-view {
+    color: #333333;
+    font-size: 32rpx;
+    line-height: 86rpx;
+  }
+  .flex-item-right-view {
+    color: #FA8C1D;
+    font-size: 22rpx;
+    // height: 86rpx;
+    width: 88rpx;
+  }
+  .item-right-img-view {
+    width: 38rpx;
+    height: 38rpx;
+    margin: 0px auto;
+  }
+  .item-right-label-view {
+    width: 88rpx;
+    height: 40rpx;
+    font-size: 22rpx;
+    line-height: 40rpx;
+  }
+  .flex-date-info-view {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 670rpx;
+    height: 140rpx;
+    margin: 0 auto;
+    border-bottom: 2rpx solid #EAEAEA;
+  }
+  .flex-date-item-left-view {
+    height: 140rpx;
+  }
+  .item-left-top-label-view {
+    height: 32rpx;
+    line-height: 32rpx;
+    color: #333333;
+    font-size: 22rpx;
+    margin-top: 30rpx;
+  }
+  .item-left-bottom-label-view {
+    height: 40rpx;
+    line-height: 40rpx;
+    color: #333333;
+    font-size: 32rpx;
+    margin-top: 10rpx;
+  }
+  .abs-mid-label-view {
+    position: absolute;
+    bottom: 32rpx;
+    right: 290rpx;
+    font-size: 28rpx;
+    color: #333333;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    border-bottom: 2rpx solid #FA8C1D;
+  } // 关键字/地址/酒店
+  .flex-address-left-view {
+    color: #333333;
+    font-size: 28rpx;
+    line-height: 86rpx;
+  }
+  .flex-address-left-views{
+    color: #CCCCCC;
+  }
+  .flex-address-right-view {
+    line-height: 85rpx;
+  } // button
+  .button {
+    color: #ffffff;
+    width: 670rpx;
+    height: 90rpx;
+    border-radius: 46rpx;
+    font-size: 36rpx;
+    background: #FCAD3E;
+    margin: 40rpx auto 0 auto;
+  }
+  .hover-button {
+    background: #FA8C1D;
+  } // 弹窗-价格/星级
+  .pop-up {
+    margin: 0 30rpx 0 30rpx;
+    width: 690rpx;
+    height: 534rpx;
+  }
+  .pop-up-title {
+    color: #333333;
+    font-size: 28rpx;
+    width: 56rpx;
+    height: 40rpx;
+  } // 价格
+  .pop-up-peice {
+    width: 100%;
+    height: 146rpx;
+    margin: 30rpx 0 0 0;
+  }
+  .pop-up-star {
+    width: 100%;
+    height: 278rpx;
+  }
+  .pop-up-star-menus {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 20rpx 0 0 0;
+  }
+  .pop-up-star-menu {
+    width: 216rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 28rpx;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 20rpx;
+    border: 2rpx solid #DDDDDD;
+  }
+  .pop-up-buttons {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+  }
+  .pop-up-button {
+    width: 376rpx;
+    height: 100rpx;
+    border: 0;
+    border-radius: 0;
+    color: #ffffff;
+    font-size: 30rpx;
+    line-height: 100rpx;
+  }
+  .pop-up-star-menu-click {
+    background: #ffffff;
+    color: #ff6600;
+    border: 1rpx solid #ff6600;
+  }
 </style>
 
 <template>
   <view class="body">
     <!-- 轮播图 -->
-    <view>
-      <swiper class="top-swiper" circular="{{true}}" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{2000}}" duration="{{500}}">
+    <view class="top-swiper-view">
+      <swiper class="top-swiper" circular="{{true}}" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
         <swiper-item>
           <image src="https://www.fybanks.com/uploads/180615/7-1P615111531S0.jpg" style="width:100%;height:100%;" />
         </swiper-item>
@@ -21,28 +181,220 @@
         </swiper-item>
       </swiper>
     </view>
-    <!-- 菜单 -->
-    <view>1</view>
+    <!-- 我的位置 -->
+    <view class="default-label-view" @tap="myAddress">
+      <view class="flex-label-view">
+        <view class="flex-item-left-view">{{myAddressName}}</view>
+        <view class="flex-item-right-view">
+          <view class="item-right-img-view">
+            <image src="../images/position-icon.png" style="width:100%;height:100%;"></image>
+          </view>
+          <view class="item-right-label-view">我的位置</view>
+        </view>
+      </view>
+    </view>
+    <!-- 入住离店日期 -->
+    <view class="default-label-view" @tap="checkOutData">
+      <view class="flex-date-info-view">
+        <view class="flex-date-item-left-view">
+          <view class="item-left-top-label-view">入住日期</view>
+          <view class="item-left-bottom-label-view">
+            <text>8月23日</text>
+            <text style="font-size:24rpx;margin-left:10rpx;">今天</text>
+          </view>
+        </view>
+        <view class="flex-date-item-right-view">
+          <view class="item-left-top-label-view">离店日期</view>
+          <view class="item-left-bottom-label-view">
+            <text>8月23日</text>
+            <text style="font-size:24rpx;margin-left:10rpx;">明天</text>
+          </view>
+        </view>
+        <view class="abs-mid-label-view">共12晚</view>
+      </view>
+    </view>
+    <!-- 关键字/地址/酒店 -->
+    <view class="default-label-view">
+      <view class="flex-label-view">
+        <!-- <view class="flex-address-left-view">{{hotelAddress}}</view> -->
+        <input style="width:100%;" bindinput="bindKeyInput" class="flex-address-left-view" placeholder="关键字/地址/酒店" placeholder-class="flex-address-left-views"/>
+        <view class="flex-address-right-view">
+          <view class="item-right-img-view">
+            <!-- <image src="../images/arrow-right-icon.png" style="width:100%;height:100%;"></image> -->
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 价格/星级 -->
+    <view class="default-label-view" @tap="showModal">
+      <view class="flex-label-view">
+        <!-- <view class="flex-address-left-view">{{priceStar}}</view> -->
+        <input value="{{priceStar}}" class="flex-address-left-view" placeholder="价格/星级" placeholder-class="flex-address-left-views"/>
+        <view class="flex-address-right-view">
+          <view class="item-right-img-view">
+            <image src="../images/arrow-right-icon.png" style="width:100%;height:100%;"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 查找全球家button -->
+    <button class="button" hover-class="hover-button" @tap="button">查找全球家</button>
+
+    <!-- 日历 -->
+    <popup1 size="634" duration='400' type="bottom" :showModal.sync="showModalDay">
+      <dateDay></dateDay>
+    </popup1>
+
+    <!-- 弹窗-价格/星级 -->
+    <popup size="634" duration='400' type="bottom" :showModal.sync="showModal">
+      <view class="pop-up">
+        <!-- 价格 -->
+        <view class="pop-up-peice">
+          <text class="pop-up-title">价格</text>
+        </view>
+        <!-- 星级 -->
+        <view class="pop-up-star">
+          <text class="pop-up-title">星级</text>
+          <view class="pop-up-star-menus">
+            <repeat for="{{dates}}" key="index" index="index" item="item">
+              <view class="pop-up-star-menu {{state==index?'pop-up-star-menu-click':''}}" @tap="select_date({{item}})">{{item.name}}</view>
+            </repeat>
+          </view>
+        </view>
+      </view>
+      <!-- 重置-确定 -->
+      <view class="pop-up-buttons">
+        <button class="pop-up-button" style="background:#404040" @tap="reset">重置</button>
+        <button class="pop-up-button" style="background:#FCAD3E" @tap="confirms">确定</button>
+      </view>
+    </popup>
+    
   </view>
 </template>
 
 <script>
-  import wepy from 'wepy'
+  import wepy from 'wepy';
+  import popup from '@/components/c-popup'; //弹窗
+  import popup1 from '@/components/c-popup'; //弹窗
+  import dateDay from '@/components/c-popup'; //日历
   export default class index extends wepy.page {
     config = {
-      navigationBarTitleText: '兜兜熊i小熊',
-      backgroundColor: '#ffffff'
-      // navigationStyle: 'custom'
+      navigationBarTitleText: '全球家'
     };
-    components = {};
-    data = {};
-    methods = {};
-    // watch监听
-    watch = {
+    components = {
+      popup: popup,
+      popup1: popup1,
+      dateDay: dateDay
     };
-    onLoad() {
-    }
+    data = {
+      showModal: false, //弹窗
+      showModalDay: false,
+      state: '',
+      myAddressName: '',
+      dates: [{
+          data_name: '0',
+          name: '不限'
+        },
+        {
+          data_name: '1',
+          name: '经济/连锁'
+        },
+        {
+          data_name: '2',
+          name: '二星/其他'
+        },
+        {
+          data_name: '3',
+          name: '三星/舒适'
+        },
+        {
+          data_name: '4',
+          name: '舒适/高档'
+        },
+        {
+          data_name: '5',
+          name: '五星/豪华'
+        }
+      ],
+      priceStar: '',
+      hotelAddress: '关键字/地址/酒店',
+      hotelAddressName:''
+    };
+    computed = {};
+    watch = {};
+    methods = {
+      // 我的位置
+      myAddress() {
+        wepy.navigateTo({
+          url: './addressList'
+        })
+      },
+      // 入住-离店日期
+      checkOutData() {
+        wx.showToast({
+          title: '日历没有嵌入',
+          icon: 'success',
+          duration: 2000
+        });
+        this.showModalDay = true
+      },
+      // 价格/星级
+      showModal(index) {
+        this.showModal = true;
+        this.$apply();
+      },
+      // 价格/星级-类型点击
+      select_date(index) {
+        this.state = index.data_name
+      },
+      // 价格-星级=重置
+      reset() {
+        this.state = ''
+        this.showModal = !this.showModal
+        this.priceStar = ''
+        this.$apply();
+      },
+      // 价格-星级=确定
+      confirms() {
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        });
+        this.showModal = !this.showModal
+        if (this.state == '' || this.state == 0) {
+          return
+        } else {
+          this.priceStar = this.dates[this.state].name
+        }
+        this.$apply();
+      },
+      // 查找全球家
+      button() {
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        });
+        console.log(this.myAddressName)
+        console.log(this.hotelAddressName)
+        console.log(this.priceStar)
+        wepy.navigateTo({
+          url: './searchList?myAddressName=' + '{name:12}'
+        })
+      },
+      bindKeyInput(e) {
+        this.hotelAddressName = e.detail.value
+      }
+    };
     onShow() {
+      // 我的地址
+      if(this.$parent.globalData.addressName === null){
+        this.myAddressName = '上海'
+      }else{
+        this.myAddressName = this.$parent.globalData.addressName
+      }
+      this.$apply()
     }
   }
 </script>

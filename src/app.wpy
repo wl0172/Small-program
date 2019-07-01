@@ -1,87 +1,109 @@
 <style lang="less">
   page {
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
+    background-color: #f6f6f6;
   }
   .body {
-    width: 100%;
     height: 100%;
+    font-family: '\5FAE\8F6F\96C5\9ED1', arial;
     overflow: hidden;
-    background: #ffffff;
+  }
+  image {
+    display: block;
   }
 </style>
 
 <script>
-  import wepy from 'wepy'
+  import wepy from 'wepy';
+  import 'wepy-async-function';
+  import config from './config/index.js'
+  import {
+    updateManager
+  } from './lib/wx-update.js';
+  require('./lib/date');
   export default class extends wepy.app {
+    $config = config
     config = {
       pages: [
-        'pages/music/music', // 音乐
-        'pages/index', // 首页
-        'pages/map/map', // 地图
-        'pages/myMessage', // 我的信息
-        'pages/Demo' // 测试
+        'pages/index', //首页
+        'pages/collection', //收藏
+        'pages/orderList',//订单列表
+
+        'pages/order', //提交订单
+        'pages/orderDetails',//订单详情
+
+        'pages/addressList', //城市list
+        'pages/searchHotel', //搜索酒店
+        'pages/searchList', //酒店搜索列表
+        
+        'pages/searchClassified', //搜索分类
+        'pages/newAddress', //新增收货地址
+        'pages/hotelDetail', //新增收货地址
+
+        'pages-A/pages/payment',//立即支付
+        'pages-A/pages/successfulPayment',//立即支付
+
+        'pages/map',//地图
+        'pages/hotelDetailConter', //详情页
+        'pages/hotelInformation',//酒店信息
+
+        'pages/evaluate',//评价
       ],
       window: {
         backgroundTextStyle: 'light',
-        navigationBarBackgroundColor: '#ffffff',
-        navigationBarTitleText: '兜兜熊i小熊',
+        navigationBarBackgroundColor: '#fff',
+        navigationBarTitleText: '小程序',
         navigationBarTextStyle: 'black',
-        backgroundColor: '#eeeeee'
+        backgroundColor: '#F6F6F6'
       },
       tabBar: {
-        color: '#7A7E83',
-        selectedColor: 'blue',
+        color: '#494949',
+        selectedColor: '#FF6600',
         borderStyle: 'black',
         backgroundColor: '#ffffff',
         list: [{
-          pagePath: 'pages/index',
-          iconPath: 'images/tabBar/1.jpg',
-          selectedIconPath: 'images/tabBar/1.jpg',
-          text: '首页'
-        }, {
-          pagePath: 'pages/music/music',
-          iconPath: 'images/tabBar/2.jpg',
-          selectedIconPath: 'images/tabBar/2.jpg',
-          text: '音乐'
-        }, {
-          pagePath: 'pages/map/map',
-          iconPath: 'images/tabBar/3.jpg',
-          selectedIconPath: 'images/tabBar/3.jpg',
-          text: '地图'
-        }, {
-          pagePath: 'pages/myMessage',
-          iconPath: 'images/tabBar/4.jpg',
-          selectedIconPath: 'images/tabBar/4.jpg',
-          text: '我的信息'
-        }, {
-          pagePath: 'pages/Demo',
-          iconPath: 'images/tabBar/4.jpg',
-          selectedIconPath: 'images/tabBar/4.jpg',
-          text: '分包测试'
-        }]
-      },
-      subPackages: [{
-        root: 'pagesA',
-        pages: [
-          'pages/demo/demo'
+            pagePath: 'pages/index',
+            iconPath: 'images/index-icon.png',
+            selectedIconPath: 'images/index-selected-icon.png',
+            text: '酒店'
+          },
+          {
+            pagePath: 'pages/collection',
+            iconPath: 'images/love-icon.png',
+            selectedIconPath: 'images/love-icon-selected.png',
+            text: '收藏'
+          },
+          {
+            pagePath: 'pages/orderList',
+            iconPath: 'images/order-icon.png',
+            selectedIconPath: 'images/order-icon-selected.png',
+            text: '订单'
+          }
         ]
-      }],
-      permission: {
-        'scope.userLocation': {
-          'desc': '你的位置信息将用于小程序位置接口的效果展示'
+      },
+      networkTimeout: {
+        request: 30000,
+        downloadFile: 30000
+      },
+      "permission": {　　
+        "scope.userLocation": {　　　　
+          "desc": "你的位置信息将用于小程序位置接口的效果展示"　　
         }
-      }
-    }
+      },
+    };
     globalData = {
-      userInfo: null
-    }
+      userInfo: null,
+      addressName:null
+    };
     constructor() {
-      super()
-      this.use('requestfix')
-      this.use('promisify')
+      super();
+      this.use('requestfix');
+      this.use('promisify');
     }
-    onLaunch() {}
+    onLaunch() {
+      console.info('小程序已启动！');
+      updateManager();
+    }
+    onHide() {}
+    onShow() {}
   }
 </script>

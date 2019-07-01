@@ -1,0 +1,347 @@
+<style lang="less">
+  page {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+  }
+  .body{
+    overflow: scroll;
+  }
+  .view-header {
+    display: flex;
+    align-items: center;
+    padding: 20rpx 0 0 30rpx;
+    border-top: 2rpx solid #E5E5E5;
+  }
+  .view-header-img{
+    width: 130rpx;
+    height: 130rpx;
+    margin: 0 22rpx 0 0;
+  }
+  .view-header-title{
+    font-size: 28rpx;
+    color: #333333;
+  }
+  .view-header-text{
+    font-size: 24rpx;
+    color: #999999;
+    margin: 10rpx 0 0 0;
+  }
+  // 评分
+  .view-score{
+    display: flex;
+    font-size: 26rpx;
+    color: #333333;
+    margin: 0 0 30rpx 0;
+    align-items: center;
+    padding: 20rpx 0 28rpx 30rpx;
+    border-bottom: 2rpx solid #EEEEEE;
+  }
+  .view-star{
+    width: 36rpx;
+    height: 36rpx;
+    margin: 0 0 0 30rpx;
+  }
+  // 上传图片
+  .upload-image{
+    display: flex;
+    // padding: 0 30rpx;
+    flex-wrap:wrap;
+  }
+  .view-upload{
+    width: 150rpx;
+    height: 150rpx;
+    margin: 0 0 30rpx 30rpx;
+    position: relative;
+  }
+  .upload-delete{
+    width: 30rpx;
+    height: 30rpx;
+    position: absolute;
+    top:-15rpx;
+    right:-15rpx;
+  }
+  // 评价星星
+  .view-stars{
+    width: 36rpx;
+    height: 36rpx;
+    padding: 0 0 0 30rpx;
+  }
+  .view-score-stars{
+    display: flex;
+    align-items: center;
+    font-size: 26rpx;
+    color: #333333;
+    padding: 44rpx 0 0 30rpx;
+  }
+  // 提交
+  .button{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    font-size: 32rpx;
+    color: #ffffff;
+    text-align: center;
+    line-height: 100rpx;
+    background:linear-gradient(90deg,rgba(250,140,29,1) 0%,rgba(252,173,62,1) 100%);
+  }
+  // 点评成功
+  .score-Success{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background:hsla(0, 0%, 0%, 0.7);
+  }
+  .score-popup{
+    width: 560rpx;
+    height: 300rpx;
+    margin:50% 96rpx;
+  }
+  .score-pop-top{
+    height: 210rpx;
+    font-size: 32rpx;
+    font-weight:600;
+    color: #333333;
+    text-align: center;
+    line-height: 210rpx;
+    background: #ffffff;
+    border-radius: 20rpx 20rpx 0 0;
+  }
+  .score-pop-down{
+    height: 90rpx;
+    font-size: 32rpx;
+    color: #ffffff;
+    line-height: 90rpx;
+    text-align: center;
+    border-radius: 0 0 20rpx 20rpx;
+    background:linear-gradient(90deg,rgba(250,140,29,1) 0%,rgba(252,173,62,1) 100%);
+  }
+  .text{
+    margin:0 auto;
+    font-size:26rpx;
+    color:#333333;
+  }
+  .placeholder-text{
+    font-size:26rpx;
+    color:#999999;
+  }
+</style>
+<template>
+  <view class="body">
+    <!-- 头部评分-img -->
+    <view class="view-header">
+      <view class="view-header-img">
+        <image src="https://www.fybanks.com/uploads/180615/7-1P615111531S0.jpg" style="width:100%;height:100%;" />
+      </view>
+      <view>
+        <view class="view-header-title">艾尚酒店(上海火车站店)</view>
+        <view class="view-header-text">08月15日 - 08月17日 共2晚</view>
+        <view class="view-header-text">豪华双床房 2间</view>
+      </view>
+    </view>
+    <!-- 评分 -->
+    <view class="view-score">
+      <text style="margin:0 68rpx 0 0;">评分</text>
+      <view style="display:flex;">
+        <view class="view-star">
+          <image src="../images/star-icon.png" style="width:100%;height:100%;" />
+        </view>
+        <view class="view-star">
+          <image src="../images/star-icon.png" style="width:100%;height:100%;" />
+        </view>
+        <view class="view-star">
+          <image src="../images/star-icon.png" style="width:100%;height:100%;" />
+        </view>
+        <view class="view-star">
+          <image src="../images/star-icon.png" style="width:100%;height:100%;" />
+        </view>
+        <view class="view-star">
+          <image src="../images/star-icon.png" style="width:100%;height:100%;" />
+        </view>
+      </view>
+    </view>
+    <!-- 快告诉小伙伴宝贝有多好吧，大家都等着你的使用心得呢 -->
+    <textarea style="width:690rpx;height:240rpx;" class="text" placeholder-class="placeholder-text" placeholder='快告诉小伙伴宝贝有多好吧，大家都等着你的使用心得呢' />
+    <!-- <view class="text">快告诉小伙伴宝贝有多好吧，大家都等着你的使用心得呢</view> -->
+    <!-- 上传图片 -->
+    <view class="upload-image">
+      <repeat for="{{imageList}}" key="index" index="index" item="item">
+        <view class="view-upload">
+          <view class="upload-delete" @tap="deleteImage({{index}})">
+            <image src="../images/evaluate-upload-delete.png" style="width:100%;height:100%;" />
+          </view>
+          <image src="{{item}}" style="width:100%;height:100%;" />
+        </view>
+      </repeat>
+      <view hidden="{{imageList.length > 5}}" @tap="upload" class="view-upload">
+        <image src="../images/evaluate-upload-icon.png" style="width:100%;height:100%;" />
+      </view>
+    </view>
+    <!-- 评价-星星 -->
+    <view style="margin:0 0 150rpx 0;">
+      <view class="view-score-stars">
+        <view>描述准确</view>
+        <view style="display:flex;">
+          <repeat for="{{starImage1}}" key="index" index="index" item="item">
+            <view class="view-stars" @tap="starClick1({{index}})">
+              <image src="{{item}}" style="width:100%;height:100%;" />
+            </view>
+          </repeat>
+        </view>
+      </view>
+      <view class="view-score-stars">
+        <view>卫生整洁</view>
+        <view style="display:flex;">
+          <repeat for="{{starImage2}}" key="index" index="index" item="item">
+            <view class="view-stars" @tap="starClick2({{index}})">
+              <image src="{{item}}" style="width:100%;height:100%;" />
+            </view>
+          </repeat>
+        </view>
+      </view>
+      <view class="view-score-stars">
+        <view>沟通服务</view>
+        <view style="display:flex;">
+          <repeat for="{{starImage3}}" key="index" index="index" item="item">
+            <view class="view-stars" @tap="starClick3({{index}})">
+              <image src="{{item}}" style="width:100%;height:100%;" />
+            </view>
+          </repeat>
+        </view>
+      </view>
+      <view class="view-score-stars">
+        <view>地理位置</view>
+        <view style="display:flex;">
+          <repeat for="{{starImage4}}" key="index" index="index" item="item">
+            <view class="view-stars" @tap="starClick4({{index}})">
+              <image src="{{item}}" style="width:100%;height:100%;" />
+            </view>
+          </repeat>
+        </view>
+      </view>
+    </view>
+    <!-- 确定提交 -->
+    <view @tap="buttons" class="button">确定提交</view>
+    <!-- 点评成功-弹窗 -->
+    <view wx:if="{{scoreShow}}" class="score-Success">
+      <view class="score-popup">
+        <view class="score-pop-top">点评成功，感谢您的点评</view>
+        <view @tap="closePop" class="score-pop-down">确定</view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  export default class evaluate extends wepy.page {
+    config = {
+      navigationBarTitleText: '发表评价'
+    }
+    components = {};
+    data = {
+      buttonShow: true,
+      state: true,
+      states: true,
+      scoreShow: false,
+      imageList:[],//上传图片
+      star1:'',
+      star2:'',
+      star3:'',
+      star4:'',
+      starImage1:['../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png'],//点评星星
+      starImage2:['../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png'],//点评星星
+      starImage3:['../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png'],//点评星星
+      starImage4:['../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png'],//点评星星
+    }
+    methods = {
+      // 点星星
+      starClick1(index) {
+        this.starImage1 = ['../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png']
+        for(var i = index;i>=0;i--){
+          this.starImage1[i] = '../images/star-icon-selected.png'
+        }
+        this.star1 = index + 1
+      },
+      starClick2(index) {
+        this.starImage2 = ['../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png']
+        for(var i = index;i>=0;i--){
+          this.starImage2[i] = '../images/star-icon-selected.png'
+        }
+        this.star2 = index + 1
+      },
+      starClick3(index) {
+        this.starImage3 = ['../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png']
+        for(var i = index;i>=0;i--){
+          this.starImage3[i] = '../images/star-icon-selected.png'
+        }
+        this.star3= index + 1
+      },
+      starClick4(index) {
+        this.starImage4 = ['../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png','../images/star-icon.png']
+        for(var i = index;i>=0;i--){
+          this.starImage4[i] = '../images/star-icon-selected.png'
+        }
+        this.star4 = index + 1
+      },
+      // 上传图片
+      upload() {
+        var that = this
+        // 获取本地图片地址
+        wx.chooseImage({
+          count: 3,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera'],
+          success (res) {
+            // console.log(res)
+            for(let i in res.tempFiles){
+              that.imageList.push(res.tempFiles[i].path)
+              that.$apply();
+            }
+            // that.imageList.push(res.tempFiles[0].path)
+            // that.$apply();
+            // 上传到网络地址
+            // wx.uploadFile({
+            //   url: '',
+            //   filePath:  res.tempFiles[0].path,
+            //   name: 'uploadfile_ant',
+            //   formData: {},
+            //   header: {
+            //     "Content-Type": "application/json;charset=UTF-8"
+            //   },
+            //   success(res){
+            //     console.log(res)
+            //   },
+            //   fail(res){
+            //     wx.showToast({
+            //       title: '上传失败',
+            //       icon: 'success',
+            //       duration: 1500
+            //     })
+            //   }
+            // })
+          }
+        })
+      },
+      // 删除图片
+      deleteImage(index) {
+        this.imageList.splice(index, 1);
+      },
+      // 确认提交
+      buttons() {
+        wx.showToast({
+          title: '确认提交',
+          icon: 'success',
+          duration: 1000
+        });
+        this.scoreShow = true
+      },
+      // 确定
+      closePop() {
+        this.scoreShow = false
+      }
+    }
+    onShow() {}
+  }
+</script>

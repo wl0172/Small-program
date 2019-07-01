@@ -1,18 +1,16 @@
 {
 	"description": "A WePY project",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": false,
-		"postcss": true,
-		"minified": false,
-		"newFeature": true,
-		"nodeModules": false,
-		"autoAudits": false,
-		"uglifyFileName": true
+		"postcss": false,
+		"minified": false
 	},
 	"compileType": "miniprogram",
 	"appid": "wx6ecab4e80a147160",
-	"projectname": "doudou",
+	"projectname": "myproject",
 	"miniprogramRoot": "dist/",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {}
 }

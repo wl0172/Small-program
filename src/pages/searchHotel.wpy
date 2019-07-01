@@ -1,0 +1,145 @@
+<style lang="less">
+  page {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+  } // 搜索框
+  .view-header-searchHotel {
+    display: flex;
+    width: 100%;
+    height: 88rpx;
+    align-items: center;
+    padding: 0 0 0rpx 20rpx;
+  }
+  .view-search {
+    display: flex;
+    background: #F0F0F0;
+    width: 600rpx;
+    height: 60rpx;
+    border-radius: 30rpx;
+    color: #333333;
+    align-items: center;
+  }
+  .view-search-icon {
+    width: 30rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+    padding: 0 0 0 20rpx;
+    margin: 0 20rpx 0 0rpx;
+  }
+  .view-placeholder-search {
+    font-size: 28rpx;
+    color: #333333;
+  }
+  .view-search-text {
+    font-size: 32rpx;
+    color: #333333;
+    padding: 0 0 0 30rpx;
+  } // 历史搜索
+  .view-historySearch {
+    width: 690rpx;
+    margin: 40rpx auto 0 auto;
+  }
+  .view-historySearch-title {
+    font-size: 30rpx;
+    color: #333333;
+  }
+  .view-historySearch-cont {
+    height: 110rpx;
+    width: 100%;
+    font-size: 28rpx;
+    color: #666666;
+    line-height: 110rpx;
+    border-bottom: 2rpx solid #E5E5E5;
+  } // 按钮
+  .button {
+    width: 500rpx;
+    height: 80rpx;
+    margin: 0 auto;
+    margin: 48rpx auto;
+    background: #ffffff;
+    border-radius: 40rpx;
+    border: 1rpx solid #DDDDDD;
+  }
+  .button-icon {
+    width: 30rpx;
+    height: 30rpx;
+    line-height: 40rpx;
+    margin: 0 10rpx 0 0;
+  }
+  .button-text {
+    font-size: 28rpx;
+    color: #333333;
+    height: 100%;
+    line-height: 80rpx;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+</style>
+
+<template>
+  <view class="body">
+    <!-- 搜索 -->
+    <view class="view-header-searchHotel">
+      <view class="view-search">
+        <view class="view-search-icon">
+          <image src="../images/location-icon.png" style="width:100%;height:100%;"></image>
+        </view>
+        <input class="view-placeholder-search" placeholder="占位符字体是红色的" />
+      </view>
+      <view class="view-search-text" @tap="search">搜索</view>
+    </view>
+    <!-- 历史搜索 -->
+    <view class="view-historySearch">
+      <view class="view-historySearch-title">历史搜索</view>
+      <view class="view-historySearch-cont">专业显示器</view>
+      <view class="view-historySearch-cont">泰国进口乐视</view>
+      <!-- 按钮 -->
+      <button class="button" @tap="button">
+        <view class="button-text">
+          <view class="button-icon">
+            <image class="" src="../images/location-icon.png" style="width:100%;height:100%;"></image>
+          </view>
+          <view>清空历史搜索</view>
+        </view>
+      </button>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  export default class searchHotel extends wepy.page {
+    config = {
+      navigationBarTitleText: '搜索酒店'
+    }
+    components = {};
+    data = {
+      sortShow: false,
+    }
+    methods = {
+      // 搜索
+      search() {
+        wx.showToast({
+          title: '搜索',
+          icon: 'success',
+          duration: 2000
+        });
+      },
+      // 清空历史搜索
+      button() {
+        wx.showModal({
+          title: '提示',
+          content: '确定清空历史搜索吗',
+          success (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+    }
+  }
+</script>
