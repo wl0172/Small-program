@@ -1,0 +1,31 @@
+<style lang="less">
+
+</style>
+
+
+<template>
+  <view class="body">
+    分包页面11
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class demo extends wepy.page {
+    config = {
+      navigationBarTitleText: '兜兜熊i小熊',
+      backgroundColor: '#ffffff'
+      // navigationStyle: 'custom'
+    };
+    components = {};
+    data = {};
+    methods = {};
+    // watch监听
+    watch = {
+    };
+    onLoad() {
+    }
+    onShow() {
+    }
+  }
+</script>
