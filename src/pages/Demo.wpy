@@ -1,11 +1,22 @@
 <style lang="less">
-
+  .view-money{
+    width: 100%;
+    height: 100%;
+    overflow:scroll;
+    image {
+      width: 100%;
+      height: 100%;
+    }
+  }
 </style>
 
 <template>
   <view class="body">
-    测试
-    <button @tap="button">打开授权设置页</button>
+    <view class="view-money">
+      <button @tap="button">跳转到分包页面</button>
+      <image src="../images/moeny.jpg" />
+    </view>
+    
   </view>
 </template>
 
@@ -21,6 +32,11 @@
     data = {};
     methods = {
       button() {
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        });
         wepy.navigateTo({
           url: '../pagesA/pages/demo/demo'
         })

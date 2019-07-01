@@ -29,6 +29,14 @@
         action="{{audioAction}}" 
         controls>
       </audio>
+      <audio style="text-align: left" 
+        src="{{current.src}}" 
+        poster="{{current.poster}}" 
+        name="{{current.name}}" 
+        author="{{current.author}}" 
+        action="{{audioAction}}" 
+        controls>
+      </audio>
     </view>
   </view>
 </template>

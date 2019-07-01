@@ -17,9 +17,9 @@
   export default class extends wepy.app {
     config = {
       pages: [
+        'pages/map/map', // 地图
         'pages/music/music', // 音乐
         'pages/index', // 首页
-        'pages/map/map', // 地图
         'pages/myMessage', // 我的信息
         'pages/Demo' // 测试
       ],

@@ -1,12 +1,25 @@
 <style lang="less">
-  #myMap {
+  #map {
     width: 100%;
     height: 100%;
   }
 </style>
 <template>
   <view class="body">
-    
+    <map id="map"
+      scale="13"
+      longitude="{{longitude}}"
+      latitude="{{latitude}}"
+      bindmarkertap="markertap"
+      bindcontroltap="controltap"
+      bindregionchange="regionchange"
+      markers="{{markers}}"
+      show-compass="{{true}}"
+      show-location>
+
+      <!-- <cover-image src="../../images/gif.gif"></cover-image> -->
+
+    </map>
   </view>
 </template>
 <script>
@@ -17,39 +30,25 @@
       backgroundColor: '#ffffff'
     }
     data = {
-      showFlag: false
+      longitude: '121.5066432953',
+      latitude: '31.2382701059',
+      markers: [{
+        iconPath: "../../images/gif.gif",
+        id: 0,
+        latitude: 31.2382701059,
+        longitude: 121.5066432953,
+        width: 50,
+        height: 50
+      }],
     };
-    onShow() {
-      this.mapCtx = wepy.createMapContext('myMap')
-      this.getCenterLocation()
-    }
-    getCenterLocation() {
+    onLoad() {
       var that = this
       wx.getLocation({
-        type: 'wgs84',
-        success: function(res) {
-          console.log(res)
-          that.setData({
-            latitude: res.latitude,
-            longitude: res.longitude
-          })
-        },
-        fail: function() {
-          wx.hideToast()
-          console.log(1)
-        }
-      })
-    }
-    getFail() {
-      var that = this
-      wx.getLocation({
-        type: 'wgs84',
-        success: function(res) {
-          console.log(res)
-          that.setData({
-            latitude: res.latitude,
-            longitude: res.longitude
-          })
+      type: 'wgs84',
+      success (res) {
+        that.longitude = res.longitude
+        that.latitude = res.latitude
+        that.$apply()
         }
       })
     }

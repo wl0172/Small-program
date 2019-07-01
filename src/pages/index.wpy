@@ -1,5 +1,9 @@
 <style lang="less">
-
+  // 菜单
+  .view-nav{
+    display: flex;
+    justify-content: center;
+  }
 </style>
 
 <template>
@@ -22,7 +26,20 @@
       </swiper>
     </view>
     <!-- 菜单 -->
-    <view>1</view>
+    <view class="view-nav">
+      <navigator 
+        url="../pagesA/pages/demo/demo" 
+        hover-class="navigator-hover">跳转到新页面
+      </navigator>
+      <navigator 
+        url="../pagesA/pages/demo/demo" 
+        hover-class="navigator-hover">跳转到新页面
+      </navigator>
+      <navigator 
+        url="../pagesA/pages/demo/demo" 
+        hover-class="navigator-hover">跳转到新页面
+      </navigator>
+    </view>
   </view>
 </template>
 
