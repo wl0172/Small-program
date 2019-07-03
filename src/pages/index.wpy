@@ -1,8 +1,7 @@
 <style lang="less">
   // 菜单
-  .view-nav{
-    display: flex;
-    justify-content: center;
+  .nav{
+    border-bottom: 2rpx solid #F5F5F5;
   }
 </style>
 
@@ -26,40 +25,82 @@
       </swiper>
     </view>
     <!-- 菜单 -->
-    <view class="view-nav">
-      <navigator 
-        url="../pagesA/pages/demo/demo" 
-        hover-class="navigator-hover">跳转到新页面
-      </navigator>
-      <navigator 
-        url="../pagesA/pages/demo/demo" 
-        hover-class="navigator-hover">跳转到新页面
-      </navigator>
-      <navigator 
-        url="../pagesA/pages/demo/demo" 
-        hover-class="navigator-hover">跳转到新页面
-      </navigator>
+    <view class="nav">
+      <nav></nav>
+    </view>
+    <!-- 列表 -->
+    <view>
+      <view></view>
     </view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import nav from '../component/nav/nav' // 导航
+  import service from '../service/index.js' // 接口
   export default class index extends wepy.page {
     config = {
       navigationBarTitleText: '兜兜熊i小熊',
       backgroundColor: '#ffffff'
       // navigationStyle: 'custom'
     };
-    components = {};
-    data = {};
-    methods = {};
-    // watch监听
-    watch = {
+    components = {
+      nav: nav
     };
+    data = {
+      values: ''
+    };
+    methods = {
+      // 获取新闻头条 
+      getNews(index) {
+        console.log(index)
+        service.getUserInfo({
+          type: 'top',
+          key: 'cc53444c0034fed5253262ad1bcbe799'
+        }).then(res => {
+          console.log(res.result.data)
+        })
+      },
+      // 获取彩票种类
+      getType() {
+        // // 彩票种类
+        service.getLotteryType({
+          key: '038d7024ee6c1443f2f1b141afd46ead'
+        }).then(res => {
+          console.log(res.result)
+        })
+      }
+    };
+    // watch监听
+    watch = {};
     onLoad() {
     }
     onShow() {
+      // // 彩票开奖结果查询
+      // service.getLottery({
+      //   key:'038d7024ee6c1443f2f1b141afd46ead'
+      // }).then(res => {
+      //   console.log(res.result)
+      //   this.$apply();
+      // })
+    }
+    events = {
+      balance(index,event){
+        console.log(index)
+        switch (index) {
+          case 0:
+            this.methods.getNews(index)
+            break;
+          case 1:
+            this.methods.getType()
+            break;
+          case 2:
+            console.log(2)
+            break;
+          default:
+        }
+      }
     }
   }
 </script>
