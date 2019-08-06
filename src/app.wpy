@@ -17,11 +17,14 @@
   export default class extends wepy.app {
     config = {
       pages: [
+        
+        
         'pages/index', // 首页
-        'pages/map/map', // 地图
         'pages/music/music', // 音乐
-        'pages/myMessage', // 我的信息
+        'pages/map/map', // 地图
+        'pages/myMessage/myMessage', // 我的信息
         'pages/Demo', // 测试
+        
       ],
       window: {
         backgroundTextStyle: 'light',
@@ -51,7 +54,7 @@
           selectedIconPath: 'images/tabBar/3.jpg',
           text: '地图'
         }, {
-          pagePath: 'pages/myMessage',
+          pagePath: 'pages/myMessage/myMessage',
           iconPath: 'images/tabBar/4.jpg',
           selectedIconPath: 'images/tabBar/4.jpg',
           text: '我的信息'

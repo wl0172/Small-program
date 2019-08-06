@@ -8,6 +8,10 @@
       height: 100%;
     }
   }
+  button{
+    position: absolute;
+    bottom: 230rpx;
+  }
 </style>
 
 <template>
@@ -16,7 +20,6 @@
       <button @tap="button">跳转到分包页面</button>
       <image src="../images/moeny.jpg" />
     </view>
-    
   </view>
 </template>
 

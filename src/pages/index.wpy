@@ -11,16 +11,13 @@
     <view>
       <swiper class="top-swiper" circular="{{true}}" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{2000}}" duration="{{500}}">
         <swiper-item>
-          <image src="https://www.fybanks.com/uploads/180615/7-1P615111531S0.jpg" style="width:100%;height:100%;" />
+          <image src="../images/1.jpg" style="width:100%;height:100%;" />
         </swiper-item>
         <swiper-item>
-          <image src="https://www.fybanks.com/uploads/170713/1-1FG31F910920.jpg" style="width:100%;height:100%;" />
+          <image src="../images/2.jpg" style="width:100%;height:100%;" />
         </swiper-item>
         <swiper-item>
-          <image src="https://www.fybanks.com/uploads/170713/1-1FG31FTVc.jpg" style="width:100%;height:100%;" />
-        </swiper-item>
-        <swiper-item>
-          <image src="https://www.fybanks.com/uploads/170918/7-1F91Q11421113.jpg" style="width:100%;height:100%;" />
+          <image src="../images/3.jpg" style="width:100%;height:100%;" />
         </swiper-item>
       </swiper>
     </view>
