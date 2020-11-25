@@ -1,7 +1,22 @@
 <style lang="less">
   // 菜单
-  .nav{
+  .nav {
     border-bottom: 2rpx solid #F5F5F5;
+  }
+  // 列表彩票
+  .Lottery{
+    display: flex;
+    padding: 20rpx;
+    background: #ffffff;
+    font-size: 30rpx;
+    align-items: center;
+    border-bottom: 2rpx solid #F5F5F5;
+  }
+  .Lottery-title{
+    margin: 0 30rpx 0 0;
+  }
+  .Lottery-week{
+    font-size: 26rpx;
   }
 </style>
 
@@ -26,9 +41,15 @@
       <nav></nav>
     </view>
     <!-- 列表 -->
-    <view>
-      <view></view>
-    </view>
+    <scroll-view scroll-y style="height: {{height}}rpx" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
+      <repeat for="{{allTypeLottery}}" key="index" index="index" item="item">
+        <view class="Lottery" @tap="clickLottery({{item}})">
+          <view class="Lottery-title">{{item.lottery_name}}</view>
+          <view class="Lottery-week">{{item.remarks}}</view>
+        </view>
+      </repeat>
+
+    </scroll-view>
   </view>
 </template>
 
@@ -36,6 +57,10 @@
   import wepy from 'wepy'
   import nav from '../component/nav/nav' // 导航
   import service from '../service/index.js' // 接口
+  import {
+    getSysHeight,
+    changePXToRPX
+  } from '../lib/wx-system.js'//工具
   export default class index extends wepy.page {
     config = {
       navigationBarTitleText: '兜兜熊i小熊',
@@ -46,54 +71,90 @@
       nav: nav
     };
     data = {
-      values: ''
+      height: '', //滚动区域高度
+      allTypeLottery: [], //彩票类型
     };
     methods = {
-      // 获取新闻头条 
-      getNews(index) {
-        console.log(index)
-        service.getUserInfo({
-          type: 'top',
-          key: 'cc53444c0034fed5253262ad1bcbe799'
-        }).then(res => {
-          console.log(res.result.data)
+      // 列表点击
+      clickLottery(item) {
+        console.log(item)
+        wepy.navigateTo({
+          url: './Lottery?Lottery=' + item.lottery_id
+        })
+      },
+      // 音乐
+      Music() {
+        service.getMusic({
+          name:'不能说的秘密'
+        }).then(res=>{
+          console.log(res)
         })
       },
       // 获取彩票种类
-      getType() {
-        // // 彩票种类
-        service.getLotteryType({
+      getType(that) {
+        service.getLottery({
           key: '038d7024ee6c1443f2f1b141afd46ead'
         }).then(res => {
-          console.log(res.result)
+          console.log(res)
+          if(res.result == null){
+            wx.showToast({
+              title: res.reason,
+              icon: 'success',
+              duration: 2000
+            });
+            return
+          }
+          that.allTypeLottery = res.result
+          that.$apply()
         })
       }
     };
     // watch监听
     watch = {};
     onLoad() {
+      let that = this
+      that.height = changePXToRPX(getSysHeight()) - 440
+      that.methods.getType(that)//彩票
+      // that.methods.Music(that)//音乐
     }
-    onShow() {
-      // // 彩票开奖结果查询
-      // service.getLottery({
-      //   key:'038d7024ee6c1443f2f1b141afd46ead'
-      // }).then(res => {
-      //   console.log(res.result)
-      //   this.$apply();
-      // })
-    }
+    onShow() {}
     events = {
-      balance(index,event){
-        console.log(index)
+      balance(index, event) {
         switch (index) {
           case 0:
-            this.methods.getNews(index)
+            wx.showToast({
+              title: '精品0',
+              icon: 'success',
+              duration: 2000
+            })
             break;
           case 1:
-            this.methods.getType()
+            wx.showToast({
+              title: '精品1',
+              icon: 'success',
+              duration: 2000
+            })
             break;
           case 2:
-            console.log(2)
+            wx.showToast({
+              title: '精品2',
+              icon: 'success',
+              duration: 2000
+            })
+            break;
+          case 3:
+            wx.showToast({
+              title: '精品3',
+              icon: 'success',
+              duration: 2000
+            })
+            break;
+          case 4:
+            wx.showToast({
+              title: '精品4',
+              icon: 'success',
+              duration: 2000
+            })
             break;
           default:
         }

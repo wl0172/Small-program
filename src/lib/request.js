@@ -18,8 +18,8 @@ function doPost(fullUrl, param, token = true) {
       }
       header = Object.assign(header, _header)
     }
-    console.log(`请求地址：${fullUrl}，请求参数：`)
-    console.log(param)
+    // console.log(`请求地址：${fullUrl}，请求参数：`)
+    // console.log(param)
     wx.request({
       url: fullUrl,
       data: param,
@@ -101,9 +101,9 @@ function doGet(fullUrl, param, token = true) {
       }
       header = Object.assign(header, _header)
     }
-    console.log(header)
-    console.log(`请求地址：${fullUrl}，请求参数：`)
-    console.log(param)
+    // console.log(header)
+    // console.log(`请求地址：${fullUrl}，请求参数：`)
+    // console.log(param)
     wx.request({
       url: fullUrl,
       data: param,
@@ -166,8 +166,8 @@ function silencePost(fullUrl, param, token = true) {
       }
       header = Object.assign(header, _header)
     }
-    console.log(`请求地址：${fullUrl}，请求参数：`)
-    console.log(param)
+    // console.log(`请求地址：${fullUrl}，请求参数：`)
+    // console.log(param)
     wx.request({
       url: fullUrl,
       data: param,
@@ -198,8 +198,8 @@ function silenceGet(fullUrl, param, token = true) {
       }
       header = Object.assign(header, _header)
     }
-    console.log(`请求地址：${fullUrl}，请求参数：`)
-    console.log(param)
+    // console.log(`请求地址：${fullUrl}，请求参数：`)
+    // console.log(param)
     wx.request({
       url: fullUrl,
       data: param,

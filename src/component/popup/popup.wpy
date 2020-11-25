@@ -1,0 +1,45 @@
+<style lang="less">
+  
+</style>
+
+<template lang="wxml">
+  <view class="body">
+    
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class popup extends wepy.component {
+    components = {};
+    data = {
+      
+    };
+    // props = {
+    //   value: {
+    //     type: Array,
+    //     default: [],
+    //     twoWay: true
+    //   },
+    //   months: {
+    //     type: String,
+    //     default: '2'
+    //   },
+    //   disabled: {
+    //     type: Boolean,
+    //     default: false
+    //   }
+    // };
+    computed = {}
+    watch = {};
+    methods = {
+     
+    };
+    onLoad() {
+      
+    }
+    onShow() {
+      
+    }
+  }
+</script>
