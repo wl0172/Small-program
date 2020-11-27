@@ -1,0 +1,127 @@
+<style lang="less">
+@import url('../app.less');
+
+page {
+  background-color: #f7f9f9;
+}
+
+.kipsong-bottom-submit-view {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  background-color: #ffffff;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px -5rpx 16rpx 0px rgba(0, 0, 0, 0.09);
+}
+.kipsong-bottom-sumit-button-view {
+  width: 690rpx;
+  height: 100rpx;
+  background: @secodary-color;
+  border-radius: 15rpx;
+  font-size: 34rpx;
+  color: #ffffff;
+  text-align: center;
+  line-height: 100rpx;
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.refresh-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.refresh-img-view {
+  width: 288rpx;
+  height: 112rpx;
+}
+</style>
+<wxs module="formatMoney" lang="babel">
+
+module.exports =  function formatMoney(num){
+ if(parseFloat(num)>0){
+   return Number(num).toFixed(2)
+ }else{
+   return num
+ }
+}
+</wxs>
+<template>
+  <div class="page" catchtouchmove="noop">
+    <scroll-view scroll-y style="height:{{scrollHeight}}px;" scroll-anchoring refresher-enabled refresher-triggered="{{bool}}" refresher-default-style="none"  @refresherrefresh="refresherrefresh">
+      <view slot="refresher" class="refresh-container" >
+        <view class="refresh-img-view">
+
+        </view>
+      </view>
+
+
+    </scroll-view>
+    <view class="kipsong-bottom-submit-view" style="height:{{buttonViewHeight}}px;" @tap="handleJump">
+      <view class="kipsong-bottom-sumit-button-view">立即购买</view>
+    </view>
+  </div>
+</template>
+
+<script>
+import wepy from '@wepy/core';
+import store from '@/store';
+import {
+  getSysWidth,
+  getSysHeight,
+  changeRPXToPX,
+  getClientType
+} from '@/utils/wx-system';
+
+import { getPackageInfo, getMemberInfo } from '@/api';
+
+wepy.page({
+  store,
+  data: {
+    scrollHeight: getSysHeight(),
+    buttonViewHeight: 0,
+    bool: false,
+    isIphoneX: false
+  },
+  computed: {},
+  methods: {
+    refresherrefresh(e) {
+      this.bool = true;
+      setTimeout(() => {
+        this.bool = false;
+      }, 1000);
+    },
+    noop() {},
+    handleJump(){
+      wx.navigateTo({
+        url: "./searchType"
+      });
+    },
+  },
+  onShow() {},
+  onLoad(option) {},
+  created() {
+    this.isIphoneX = store.getters.isIphoneX;
+    this.buttonViewHeight = this.isIphoneX
+      ? changeRPXToPX(200)
+      : changeRPXToPX(168);
+    this.scrollHeight =
+      getSysHeight() -
+      (this.isIphoneX ? changeRPXToPX(200) : changeRPXToPX(168));
+  }
+});
+</script>
+<config>
+{
+    navigationBarTitleText: 'demo',
+    backgroundColor:'#F7F9F9',
+
+    usingComponents: {
+      "auth-dialog": '~@/components/operCom/authDialog'
+    }
+}
+</config>

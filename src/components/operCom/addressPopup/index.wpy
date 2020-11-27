@@ -1,0 +1,293 @@
+<style lang="less">
+/** less **/
+@import url('../../../app.less');
+.kipsong-popup-view {
+  background-color: #fff;
+}
+.kipsong-popup-title-view {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 34rpx;
+  color: #191919;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  // border-bottom: 2rpx solid #bfbfbe;
+  background-color: #fff;
+  position: relative;
+}
+
+.kipsong-popup-delete-icon-view {
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  right: 20rpx;
+  top: 35rpx;
+}
+
+.kipsong-picker-view {
+  position: relative;
+  height: 372rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  margin: 40rpx 0px 60rpx 0px;
+}
+.kipsong-column-item-view {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.kipsong-abs-mid-line-view {
+  width: 2rpx;
+  height: 372rpx;
+  position: absolute;
+  top: 0;
+  left: 374.5rpx;
+  background-color: #bfbfbe;
+}
+.kisong-submit-button-view {
+  width: 650rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: @secodary-color;
+  text-align: center;
+  margin: 0px auto;
+  color: #ffffff;
+  font-size: 35rpx;
+  border-radius: 15rpx;
+  &:active {
+    opacity: 0.8;
+  }
+}
+.kippsong-picker-hairline-top-view {
+  position: absolute;
+  top: 124rpx;
+  left: 50rpx;
+  width: 285rpx;
+  height: 1rpx;
+  background-color: #202122;
+  pointer-events: none;
+  z-index: 1;
+}
+.kippsong-picker-hairline-bottom-view {
+  position: absolute;
+  bottom: 124rpx;
+  left: 50rpx;
+  width: 285rpx;
+  height: 1rpx;
+  background-color: #202122;
+  pointer-events: none;
+  z-index: 1;
+}
+.kipsong-address-label-view {
+  width: 100%;
+  display: flex;
+  height: 80rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.kipsong-address-item-label-view {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 26rpx;
+  text-align: center;
+}
+.kipsong-address-item-row-view {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  align-items: center;
+}
+.kipsong-address-item-text-view {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-weight: 400;
+  font-size: 26rpx;
+  color: #333333;
+  margin-left: 35rpx;
+}
+.kipsong-address-item-img-view {
+  width: 35rpx;
+  height: 35rpx;
+  margin-left: 15rpx;
+}
+
+.color {
+  color: #f3344a;
+}
+.tag-color {
+  color: #f3344a;
+  border-bottom: 1rpx solid #f3344a;
+}
+.kipsong-address-item-tag-view {
+  margin-left: 35rpx;
+  max-width: 170rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
+<wxs module="isSimple">
+  function isSimple(columns) {
+    return columns.length && !columns[0].values;
+  }
+  module.exports = isSimple;
+</wxs>
+
+<template>
+  <popup type="bottom" :showDialog="showDialog" size="745" duration="400" radius="20" @hideModel="hideModel">
+    <view class="kipsong-popup-view">
+      <view class="kipsong-popup-title-view">
+        <view>{{title}}</view>
+        <view class="kipsong-popup-delete-icon-view" @tap="hideModel">
+          <image style="width:100%;height:100%;" src="../../../assets/images/square-delete-icon.png"/>
+        </view>
+      </view>
+      <view class="kipsong-address-label-view">
+        <view class="kipsong-address-item-label-view" v-for="(item,index) in regitonList" @tap="handleRegionTag(index)">
+          <view class="kipsong-address-item-tag-view {{currentIndex==index?'tag-color':''}}">{{item.name?item.name:'请选择'}}</view>
+        </view>
+      </view>
+      <scroll-view scroll-y style="height:{{scrollHeight}}px;">
+        <view v-if="currentIndex==0" class="kipsong-address-item-row-view" v-for="(item,index) in regionList0" @tap="handleRegion(0,index)">
+          <view class="kipsong-address-item-text-view {{regitonList[0].id==item.id?'color':''}}">
+            {{item.name}}
+          </view>
+          <view class="kipsong-address-item-img-view" v-if="regitonList[0].id==item.id">
+             <image style="width:100%;height:100%;" src="../../../assets/images/hook-selected-icon.png"/>
+          </view>
+        </view>
+
+        <view v-if="currentIndex==1" class="kipsong-address-item-row-view" v-for="(item,index) in regionList1" @tap="handleRegion(1,index)">
+          <view class="kipsong-address-item-text-view {{regitonList[1].id==item.id?'color':''}}">
+            {{item.name}}
+          </view>
+          <view class="kipsong-address-item-img-view" v-if="regitonList[1].id==item.id">
+             <image style="width:100%;height:100%;" src="../../../assets/images/hook-selected-icon.png"/>
+          </view>
+        </view>
+
+        <view v-if="currentIndex==2" class="kipsong-address-item-row-view" v-for="(item,index) in regionList2" @tap="handleRegion(2,index)">
+          <view class="kipsong-address-item-text-view {{regitonList[2].id==item.id?'color':''}}">
+            {{item.name}}
+          </view>
+          <view class="kipsong-address-item-img-view" v-if="regitonList[2].id==item.id">
+             <image style="width:100%;height:100%;" src="../../../assets/images/hook-selected-icon.png"/>
+          </view>
+        </view>
+
+        <view v-if="currentIndex==3" class="kipsong-address-item-row-view" v-for="(item,index) in regionList3" @tap="handleRegion(3,index)">
+          <view class="kipsong-address-item-text-view {{regitonList[3].id==item.id?'color':''}}">
+            {{item.name}}
+          </view>
+          <view class="kipsong-address-item-img-view" v-if="regitonList[3].id==item.id">
+             <image style="width:100%;height:100%;" src="../../../assets/images/hook-selected-icon.png"/>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </popup>
+</template>
+<script>
+import wepy from '@wepy/core';
+import { changeRPXToPX } from '@/utils/wx-system.js';
+import { getRegionList } from '@/api';
+wepy.component({
+  props: {
+    showDialog: {
+      type: Boolean,
+      default: false
+    },
+    title: String
+  },
+  watch: {},
+  data: {
+    scrollHeight: 0,
+    currentIndex: 0,
+    regionList0: [],
+    regionList1: [],
+    regionList2: [],
+    regionList3: [],
+    regitonList: [
+      {
+        id: '',
+        name: ''
+      }
+    ]
+  },
+  methods: {
+    noop() {},
+    hideModel(value) {
+      this.$emit('hideModel', null);
+    },
+    handleRegionTag(index) {
+      this.currentIndex = index;
+    },
+    handleRegion(index, regionIndex) {
+      if (index < 4) {
+        // 1、存入数据
+        this.regitonList.splice(index);
+        let regionId = this['regionList' + index][regionIndex].id;
+        let name = this['regionList' + index][regionIndex].name;
+        this.$set(this.regitonList, index, {
+          id: regionId,
+          name: name
+        });
+
+        if (index < 3) {
+          // 2、获取下一个地址
+          this.$set(this.regitonList, index + 1, {
+            id: '',
+            name: ''
+          });
+          this.currentIndex = index + 1;
+          this._getRegionList(regionId, index + 1);
+        }
+        if (this.regitonList[3] && this.regitonList[3].id) {
+          this.$emit('handleBackInfo', this.regitonList, this.regitonList);
+        }
+      }
+    },
+    _getRegionList(id, level) {
+      getRegionList({
+        ISRETURN: true,
+        regionId: id,
+        level: level + 1
+      }).then(res => {
+        switch (level) {
+          case 0:
+            this.regionList0 = res;
+            break;
+          case 1:
+            this.regionList1 = res;
+            break;
+          case 2:
+            this.regionList2 = res;
+            break;
+          case 3:
+            this.regionList3 = res;
+            break;
+
+          default:
+            break;
+        }
+      });
+    }
+  },
+  created() {
+    this.scrollHeight = changeRPXToPX(745 - 160);
+    this._getRegionList(778937, 0);
+  }
+});
+</script>
+<config>
+{
+    usingComponents: {
+      "popup": '~@/components/operCom/popup'
+    }
+}
+</config>

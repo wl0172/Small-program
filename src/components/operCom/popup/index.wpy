@@ -1,0 +1,157 @@
+<style lang="less" scopeed>
+/** less **/
+.kipsong-modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 900;
+  color: #fff;
+  background: #000;
+  opacity: 0.5;
+}
+.kipsong-modal-dialog {
+  overflow: hidden;
+  position: fixed;
+  z-index: 998;
+  width: 0px;
+  background-color:#f9f9f9;
+}
+</style>
+<template>
+  <view wx:if="{{showDialog}}" class="kipsong-modal-mask" @tap="hideModel" catchtouchmove="preventTouchMove">
+  </view>
+  <view animation="{{animationData}}" catchtouchmove="preventTouchMove" class="kipsong-modal-dialog" style="{{popupStyle}}">
+    <slot>
+    </slot>
+  </view>
+</template>
+<script>
+import wepy from '@wepy/core';
+import { changeRPXToPX } from '@/utils/wx-system.js';
+
+wepy.component({
+  options: {
+    multipleSlots: true // 在组件定义时的选项中启用多slot支持
+  },
+  props: {
+    type: {
+      type: String,
+      default: 'right'
+    },
+    showDialog: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: [String, Number],
+      default: '400'
+    },
+    duration: {
+      type: [String, Number],
+      default: '400'
+    },
+    radius: {
+      type: [String, Number],
+      default: '0'
+    },
+    backgroundColor:{
+      type:String,
+      default:'#fff;'
+    }
+  },
+  watch: {
+    showDialog(newValue, oldValue) {
+      switch (this.type) {
+        case 'top':
+          this.popupStyle = `height:${this.size}rpx;width:100%;top:${-this
+            .size}rpx;background-color:${this.backgroundColor};`;
+          if (newValue && !oldValue) {
+            this.animationData = wx.createAnimation({
+              duration: this.duration,
+              timingFunction: 'linear'
+            });
+            this.animationData.translateY(changeRPXToPX(this.size)).step();
+          } else {
+            this.animationData = wx.createAnimation({
+              duration: this.duration,
+              timingFunction: 'linear'
+            });
+            this.animationData.translateY(0).step();
+          }
+          break;
+        case 'right':
+          this.popupStyle = `width:${this.size}rpx;right:${-this
+            .size}rpx;top:0px;bottom:0px;background-color:${this.backgroundColor};`;
+          if (newValue && !oldValue) {
+            this.animationData = wx.createAnimation({
+              duration: this.duration,
+              timingFunction: 'linear'
+            });
+            this.animationData.translateX(-changeRPXToPX(this.size)).step();
+          } else {
+            this.animationData = wx.createAnimation({
+              duration: this.duration,
+              timingFunction: 'linear'
+            });
+            this.animationData.translateX(0).step();
+          }
+          break;
+        case 'bottom':
+          this.popupStyle = `height:${this.size}rpx;bottom:${-this
+            .size}rpx;width:100%;border-top-left-radius: ${
+            this.radius
+          }rpx;border-top-right-radius: ${this.radius}rpx;background-color:${this.backgroundColor};`;
+          if (newValue && !oldValue) {
+            this.animationData = wx.createAnimation({
+              duration: this.duration,
+              timingFunction: 'ease'
+            });
+            this.animationData.translateY(-changeRPXToPX(this.size)).step();
+          } else {
+            this.animationData = wx.createAnimation({
+              duration: this.duration,
+              timingFunction: 'ease'
+            });
+            this.animationData.translateY(0).step();
+          }
+          break;
+        case 'left':
+          this.popupStyle = `width:${this.size}rpx;left:${-this
+            .size}rpx;top:0px;bottom:0px;background-color:${this.backgroundColor};`;
+          if (newValue && !oldValue) {
+            this.animationData = wx.createAnimation({
+              duration: this.duration,
+              timingFunction: 'ease'
+            });
+            this.animationData.translateX(changeRPXToPX(this.size)).step();
+          } else {
+            this.animationData = wx.createAnimation({
+              duration: this.duration,
+              timingFunction: 'ease'
+            });
+            this.animationData.translateX(0).step();
+          }
+          break;
+        default:
+          break;
+      }
+    }
+  },
+  data: {
+    animationData: {},
+    popupStyle: ''
+  },
+  methods: {
+    hideModel() {
+      this.$emit("hideModel", null);
+    },
+    preventTouchMove() {
+      // 阻止滚动事件
+    }
+  },
+  onLoad() {}
+});
+</script>

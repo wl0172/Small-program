@@ -1,0 +1,198 @@
+<style lang="less" scopeed>
+/** less **/
+.kipsong-modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 1200;
+  color: #fff;
+  background: #000;
+  opacity: 0.5;
+}
+.kipsong-modal-dialog {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-40%);
+  border-radius: 24rpx;
+  z-index: 9999;
+  width: 650rpx;
+  left: 50rpx;
+  height: 340rpx;
+  background-color: #fff;
+  overflow: hidden;
+}
+.kipsong-inner-modal-view {
+  width: 100%;
+  height: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.kipsong-inner-bottom-view {
+  width: 100%;
+  height: 114rpx;
+  line-height: 114rpx;
+  justify-content: center;
+  display: flex;
+  font-size: 32rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top: 2rpx solid #f5f9f9;
+}
+.kipsong-inner-item-button-view-left {
+  width: 50%;
+  height: 100%;
+
+  box-sizing: border-box;
+  text-align: center;
+  border: none !important;
+  border-left: 1rpx solid #f5f9f9 !important;
+  background-color: #fff;
+  margin: 0px;
+  padding: 0;
+  line-height: 114rpx;
+  font-size: 32rpx;
+  &:active {
+    opacity: 0.7;
+  }
+}
+button::after {
+  border: 0px;
+}
+
+.kipsong-inner-item-button-view-right {
+  width: 50%;
+  height: 100%;
+  border-right: 1rpx solid #f5f9f9;
+  box-sizing: border-box;
+  text-align: center;
+  &:active {
+    opacity: 0.7;
+  }
+}
+.kipsong-inner-item-button-view-default {
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+  text-align: center;
+  border: none !important;
+  border-left: 1rpx solid #f5f9f9 !important;
+  background-color: #fff;
+  margin: 0px;
+  padding: 0;
+  line-height: 114rpx;
+  font-size: 32rpx;
+  &:active {
+    opacity: 0.7;
+  }
+}
+.kiosong-content-label-view {
+  height: 225rpx;
+  color: #202122;
+  font-size: 32rpx;
+  text-align: center;
+}
+</style>
+<template>
+  <view wx:if="{{showDialog}}" class="kipsong-modal-mask" @tap="hideModel" catchtouchmove="preventTouchMove">
+  </view>
+  <view wx:if="{{showDialog}}" catchtouchmove="preventTouchMove" class="kipsong-modal-dialog" >
+    <view class="kipsong-inner-modal-view">
+      <view class="kiosong-content-label-view">
+        <view>为了提供更好的服务</view>
+        <view>请微信授权登录</view>
+      </view>
+      <view class="kipsong-inner-bottom-view">
+
+        <view @tap="cancel" class="kipsong-inner-item-button-view-right" style="color:{{cancelColor}};" v-if="showCancel">
+          {{cancelText}}
+        </view>
+
+        <button  open-type="getUserInfo" @getuserinfo="bindUserInfo" class="kipsong-inner-item-button-view-default" style="color:{{confirmColor}};" v-if="!showCancel">
+          {{confirmText}}
+        </button>
+        <button open-type="getUserInfo" @getuserinfo="bindUserInfo"  class="kipsong-inner-item-button-view-left" style="color:{{confirmColor}};" v-if="showCancel">
+          {{confirmText}}
+        </button>
+
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from '@wepy/core';
+import { changeRPXToPX } from '@/utils/wx-system.js';
+
+wepy.component({
+  options: {
+    multipleSlots: true // 在组件定义时的选项中启用多slot支持
+  },
+  props: {
+    showDialog: {
+      type: Boolean,
+      default: false
+    },
+    showCancel: {
+      type: Boolean,
+      default: true
+    },
+    content: {
+      type: String,
+      default: '内容'
+    },
+    confirmText: {
+      type: String,
+      default: '是'
+    },
+    confirmColor: {
+      type: String,
+      default: '#F3344A'
+    },
+    cancelText: {
+      type: String,
+      default: '取消'
+    },
+    cancelColor: {
+      type: String,
+      default: '#202122'
+    }
+  },
+  watch: {
+    showDialog(newValue, oldValue) {}
+  },
+  data: {
+    popupStyle: ''
+  },
+  methods: {
+    bindUserInfo(e) {
+      if (e.$wx.detail.userInfo) {
+        this.$emit('confirm', e.$wx.detail.userInfo);
+      }
+    },
+    getPhoneNumber(e) {
+      this.$emit('confirm', e);
+    },
+    confirm() {
+      this.$emit('confirm');
+    },
+    cancel() {
+      this.$emit('cancel');
+    },
+    hideModel() {
+      // this.$emit('hideModel', null);
+    },
+    preventTouchMove() {
+      // 阻止滚动事件
+    }
+  },
+  onLoad() {}
+});
+</script>

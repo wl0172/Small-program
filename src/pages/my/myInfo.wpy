@@ -1,0 +1,612 @@
+<style lang="less" scoped>
+@import url('../../assets/style/app.less');
+page {
+  background-color: @four-color;
+}
+.kipsong-swiper {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.kipsong-swiper-item-view {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.kipsong-share-logo-img-view {
+  width: 367rpx;
+  height: 108rpx;
+  position: absolute;
+  top: 30%;
+  left: 192rpx;
+  opacity: 0;
+}
+.kipsong-text-label-view {
+  width: 100%;
+  position: absolute;
+  top: 20%;
+  font-size: 40rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  line-height: 56rpx;
+  text-align: center;
+}
+.kipsong-text-label-view view {
+  opacity: 0;
+}
+
+.kipsong-user-avatar-view {
+  width: 100%;
+  height: 162rpx;
+  margin-top: 44vh;
+  z-index: 2;
+  position: relative;
+}
+.kipsong-around-avatar-view {
+  position: absolute;
+  top: 0px;
+  height: 162rpx;
+  width: 162rpx;
+  left: 294rpx;
+  &.mid {
+    z-index: 50;
+    opacity: 0;
+  }
+  &.left {
+    z-index: 88;
+    overflow: hidden;
+    border-radius: 50%;
+    opacity: 0;
+  }
+  &.right {
+    opacity: 0;
+    z-index: 99;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+}
+.kipsong-hands-icon-img-view {
+  width: 74rpx;
+  height: 74rpx;
+  margin: 44rpx auto 0px auto;
+}
+.kipsong-swiper-bottom-view {
+  width: 570rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: rgba(221, 189, 166, 1);
+  border-radius: 60rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(25, 25, 25, 1);
+  text-align: center;
+  position: absolute;
+  bottom: 110rpx;
+  left: 90rpx;
+  opacity: 0;
+}
+
+.kipsong-text-1-label-view {
+  width: 100%;
+  margin-top: 180rpx;
+  font-size: 40rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  line-height: 56rpx;
+  text-align: center;
+}
+.kipsong-form-label-view {
+  width: 570rpx;
+  margin: 90rpx auto 0px auto;
+}
+.kipsong-title-label-view {
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #ffffff;
+}
+.kipsong-input-label-view {
+  width: 570rpx;
+  margin: 0px auto;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #ffffff;
+  border: 2rpx solid rgba(255, 255, 255, 1);
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+}
+.kipsong-defualt-input {
+  width: 100%;
+  height: 100%;
+  font-size: 28rpx;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+  color: #ffffff;
+}
+.placeholder-input-class {
+  height: 40rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #9bacab;
+  line-height: 40rpx;
+}
+.kipsong-input-item-left-view {
+  width: 50%;
+  border-right: 2rpx solid #ffffff;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:active {
+    opacity: 0.8;
+  }
+}
+.kipsong-input-item-right-view {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:active {
+    opacity: 0.8;
+  }
+}
+.kipsong-input-icon-view {
+  width: 40rpx;
+  height: 40rpx;
+}
+.kipsong-form-text-expres-view {
+  height: 30rpx;
+  line-height: 30rpx;
+  width: 100%;
+  display: flex;
+  color: #ffffff;
+  font-size: 20rpx;
+  margin-top: 16rpx;
+}
+.kipsong-swiper-bottom-button {
+  width: 570rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: rgba(221, 189, 166, 1);
+  border-radius: 60rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(25, 25, 25, 1);
+  text-align: center;
+  position: absolute;
+  bottom: 110rpx;
+  left: 90rpx;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+.kipsong-birthday-selected-picker-view {
+  width: 100%;
+  height: 180rpx;
+  display: flex;
+  align-items: center;
+  align-items: center;
+  position: relative;
+}
+.kipsong-picker-column1-view {
+  width: 138rpx;
+  height: 180rpx;
+  overflow: hidden;
+  position: relative;
+}
+.kipsong-picker-column2-view {
+  width: 96rpx;
+  height: 180rpx;
+  margin-left: 102rpx;
+  overflow: hidden;
+  position: relative;
+}
+.kipsong-picker-column3-view {
+  width: 96rpx;
+  height: 180rpx;
+  margin-left: 102rpx;
+  overflow: hidden;
+  position: relative;
+}
+.kipsong-picker-mid-view {
+  pointer-events: none;
+  height: 90rpx;
+  position: absolute;
+  top: 45rpx;
+  left: 0;
+  display: flex;
+  z-index: 99;
+}
+.kipsong-picker-top-view {
+  pointer-events: none;
+  height: 45rpx;
+  width: 100%;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(25, 75, 71, 1) 0%,
+    rgba(25, 75, 71, 0) 100%
+  );
+  background: -o-linear-gradient(
+    180deg,
+    rgba(25, 75, 71, 1) 0%,
+    rgba(25, 75, 71, 0) 100%
+  );
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(25, 75, 71, 1) 0%,
+    rgba(25, 75, 71, 0) 100%
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(25, 75, 71, 1) 0%,
+    rgba(25, 75, 71, 0) 100%
+  );
+}
+.gradient {
+}
+.kipsong-picker-bottom-view {
+  pointer-events: none;
+  height: 45rpx;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1000;
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(25, 75, 71, 1) 0%,
+    rgba(25, 75, 71, 0) 100%
+  );
+  background: -o-linear-gradient(
+    180deg,
+    rgba(25, 75, 71, 1) 0%,
+    rgba(25, 75, 71, 0) 100%
+  );
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(25, 75, 71, 1) 0%,
+    rgba(25, 75, 71, 0) 100%
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(25, 75, 71, 1) 0%,
+    rgba(25, 75, 71, 0) 100%
+  );
+}
+.kipsong-mid-column1-view {
+  height: 100%;
+  width: 138rpx;
+  border-left: 1rpx solid #ffffff;
+  border-right: 1rpx solid #ffffff;
+  box-sizing: border-box;
+}
+.kipsong-mid-column1-text-view {
+  height: 100%;
+  line-height: 90rpx;
+  width: 86rpx;
+  color: #ffffff;
+  font-size: 30rpx;
+  margin-left: 16rpx;
+}
+.kipsong-mid-column2-view {
+  height: 100%;
+  width: 96rpx;
+  border-left: 1rpx solid #ffffff;
+  border-right: 1rpx solid #ffffff;
+  box-sizing: border-box;
+}
+.kipsong-mid-column2-text-view {
+  height: 100%;
+  line-height: 90rpx;
+  width: 86rpx;
+  color: #ffffff;
+  font-size: 30rpx;
+  margin-left: 16rpx;
+  box-sizing: border-box;
+}
+
+.kipsong-mid-column3-view {
+  height: 100%;
+  width: 96rpx;
+  border-left: 1rpx solid #ffffff;
+  border-right: 1rpx solid #ffffff;
+  box-sizing: border-box;
+}
+.kipsong-mid-column3-text-view {
+  height: 100%;
+  line-height: 90rpx;
+  width: 86rpx;
+  color: #ffffff;
+  font-size: 30rpx;
+  margin-left: 16rpx;
+  box-sizing: border-box;
+}
+
+.kipsong-picker-item {
+  width: 100%;
+  text-align: center;
+  color: #bfbfbe;
+}
+.kipsong-picker-item--disabled {
+  opacity: 0.2;
+}
+.active-class {
+  color: #191919;
+  font-weight: 500;
+}
+.kipsong-share-text-view {
+  width: 467rpx;
+  height: 132rpx;
+  line-height: 56rpx;
+  position: absolute;
+  top: 30%;
+  left: 142rpx;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 300;
+  font-size: 40rpx;
+}
+.selected {
+  background-color: #ffffff;
+}
+.kipsong-dialog-title-view {
+  width: 100%;
+  height: 108rpx;
+  overflow: hidden;
+  line-height: 108rpx;
+  display: flex;
+  box-shadow: 16rpx -5rpx 80rpx 0px rgba(0, 0, 0, 0.09);
+}
+.kipsong-title-main-text-view {
+  font-size: 34rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(25, 25, 25, 1);
+  margin-left: 50rpx;
+}
+.kipsong-title-sub-text-view {
+  font-size: 20rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+  margin-left: 30rpx;
+}
+.kipsong-dialog-row-view {
+  width: 650rpx;
+  margin: 0px auto;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  font-size: 28rpx;
+}
+.border {
+  border-bottom: 1rpx solid #e6e6ea;
+  box-sizing: border-box;
+}
+.kipsong-dialog-row-left-view {
+  color: #adadad;
+  margin-right: 60rpx;
+}
+.kipsong-dialog-row-right-view {
+  color: #191919;
+}
+.kipsong-popup-dialog-view {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.kipsong-dialog-button-abs-view {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 90rpx;
+  left: 0;
+  width: 100%;
+  height: 86rpx;
+}
+.kipsong-dialog-button-left-view {
+  width: 308rpx;
+  height: 86rpx;
+  border-radius: 12rpx;
+  border: 2rpx solid rgba(25, 75, 71, 1);
+  text-align: center;
+  font-size: 32rpx;
+  color: @four-color;
+  margin-right: 34rpx;
+  line-height: 86rpx;
+  &:active {
+    opacity: 0.7;
+  }
+}
+
+.kipsong-dialog-button-right-view {
+  width: 308rpx;
+  height: 86rpx;
+  border-radius: 12rpx;
+  background-color: @four-color;
+  text-align: center;
+  font-size: 32rpx;
+  color: #ffffff;
+  margin-right: 34rpx;
+  line-height: 86rpx;
+  &:active {
+    opacity: 0.7;
+  }
+}
+.kipsong-dialog-button-abs-view button {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+</style>
+
+<template>
+  <div class="page" catchtouchmove="noop">
+    
+    <!-- 背景图 -->
+    <view animation="{{animationText0}}" class="kipsong-share-text-view">
+      <image style="width:100%;height:100%;" src="../../assets/images/share-logo-1.png"/>
+    </view>
+
+    <!-- hi -->
+    <view class="kipsong-text-label-view">
+      <view  animation="{{animationText1}}">Hi~</view>
+      <view animation="{{animationText2}}">我是{{userInfo.name}}</view>
+      <view animation="{{animationText3}}">很高兴认识你</view>
+    </view>
+
+    <view class="kipsong-user-avatar-view">
+      <view animation="{{animationIcon7}}" class="kipsong-around-avatar-view mid">
+        <view class="kipsong-hands-icon-img-view">
+            <image style="width:100%;height:100%;" src="../../assets/images/handshake-icon.png"/>
+        </view>
+      </view>
+      <view animation="{{animationAvatar5}}" class="kipsong-around-avatar-view left">
+          <image style="width:100%;height:100%;" src="../../assets/images/my-profile-photo.jpg"/>
+      </view>
+      <view animation="{{animationAvatar6}}" class="kipsong-around-avatar-view right">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+    </view>
+    <view class="kipsong-swiper-bottom-view" animation="{{animationButton8}}" @tap="handleNextPage">下一步</view>
+
+
+
+  </div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  import {
+    getSysWidth,
+    getSysHeight,
+    changeRPXToPX,
+    getClientType
+  } from '@/utils/wx-system';
+
+  wepy.page({
+    data: {
+      animationText0: null,
+      animationText1: null,
+      animationText2: null,
+      animationText3: null,
+      animationText4: null,
+      animationAvatar5: null,
+      animationAvatar6: null,
+      animationIcon7: null,
+      animationButton8: null,
+      userInfo: {
+        name: '刘家伟'
+      }
+    },
+    computed: {},
+    watch: {},
+    methods: {
+      noop() {},
+      handleNextPage() {
+        wx.reLaunch({
+          url: './detailInfo'
+        });
+      },
+    },
+    created () {},
+    onLoad(option) {
+
+      this.animationText0 = wx.createAnimation({
+        duration: 1200, // 动画持续时间，单位 ms
+        timingFunction: 'linear', // 动画的效果
+        delay: 800 // 动画延迟时间，单位 ms
+      });
+      this.animationText0.opacity(0).step();
+
+      this.animationText1 = wx.createAnimation({
+        duration: 1000, // 动画持续时间，单位 ms
+        timingFunction: 'linear', // 动画的效果
+        delay: 2500 // 动画延迟时间，单位 ms
+      });
+      this.animationText1.opacity(1).step();
+
+      this.animationText2 = wx.createAnimation({
+        duration: 1000, // 动画持续时间，单位 ms
+        timingFunction: 'linear', // 动画的效果
+        delay: 3000 // 动画延迟时间，单位 ms
+      });
+      this.animationText2.opacity(1).step();
+
+      this.animationText3 = wx.createAnimation({
+        duration: 1000, // 动画持续时间，单位 ms
+        timingFunction: 'linear', // 动画的效果
+        delay: 3500 // 动画延迟时间，单位 ms
+      });
+      this.animationText3.opacity(1).step();
+
+      this.animationText4 = wx.createAnimation({
+        duration: 1000, // 动画持续时间，单位 ms
+        timingFunction: 'linear', // 动画的效果
+        delay: 4000 // 动画延迟时间，单位 ms
+      });
+      this.animationText4.opacity(1).step();
+
+      this.animationIcon7 = wx.createAnimation({
+        duration: 300, // 动画持续时间，单位 ms
+        timingFunction: 'linear', // 动画的效果
+        delay: 4500 // 动画延迟时间，单位 ms
+      });
+      this.animationIcon7.opacity(1).step();
+
+      this.animationAvatar5 = wx.createAnimation({
+        duration: 300, // 动画持续时间，单位 ms
+        timingFunction: 'linear', // 动画的效果
+        delay: 4500 // 动画延迟时间，单位 ms
+      });
+      this.animationAvatar5
+        .translateX(changeRPXToPX(-150))
+        .opacity(1)
+        .step();
+
+      this.animationAvatar6 = wx.createAnimation({
+        duration: 300, // 动画持续时间，单位 ms
+        timingFunction: 'linear', // 动画的效果
+        delay: 4500 // 动画延迟时间，单位 ms
+      });
+      this.animationAvatar6
+        .translateX(changeRPXToPX(150))
+        .opacity(1)
+        .step();
+
+      this.animationButton8 = wx.createAnimation({
+        duration: 300, // 动画持续时间，单位 ms
+        timingFunction: 'linear', // 动画的效果
+        delay: 4600 // 动画延迟时间，单位 ms
+      });
+      this.animationButton8.opacity(1).step().export();
+
+    },
+    onShow(){
+
+    }
+  });
+</script>
+<config>
+{
+    navigationBarTitleText: '',
+    navigationStyle:'custom',
+    disableScroll:true,
+    usingComponents: {}
+}
+</config>
