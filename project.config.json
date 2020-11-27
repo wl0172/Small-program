@@ -39,5 +39,24 @@
   "miniprogramRoot": "weapp/",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "condition": {}
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "我的详情信息",
+          "pathName": "pages/my/detailInfo",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

@@ -1,69 +1,677 @@
 <style lang="less">
-@import url('../app.less');
+@import url('../../assets/style/app.less');
 
 page {
-  background-color: #f7f9f9;
+  background-color: @four-color;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  flex: 1; // overflow: hidden;
+  box-sizing: border-box;
 }
 
-.kipsong-bottom-submit-view {
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  background-color: #ffffff;
+.swiper-view {
   width: 100%;
+  flex: 1;
+}
+.swiper-item-view {
+  overflow-y: auto;
+  height: 100%;
+}
+.swiper-column-view {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px -5rpx 16rpx 0px rgba(0, 0, 0, 0.09);
 }
-.kipsong-bottom-sumit-button-view {
-  width: 690rpx;
-  height: 100rpx;
-  background: @secodary-color;
-  border-radius: 15rpx;
-  font-size: 34rpx;
+.swiper-item-view {
+  overflow-y: auto;
+  height: 100%;
+}
+.abs-title-view {
+  position: absolute;
+  top: 100rpx;
+  margin: 0px auto;
+  font-size: 68rpx;
+  color: @five-color;
+  font-weight: 800;
+}
+.text {
+  margin-top: 150rpx;
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+  text-indent: 24rpx;
   color: #ffffff;
-  text-align: center;
-  line-height: 100rpx;
-  &:active {
-    opacity: 0.8;
+  -webkit-animation: colorText 5s ease-out infinite,
+    nudgeText 5s ease-out infinite;
+  animation: colorText 5s ease-out infinite, nudgeText 5s ease-out infinite;
+}
+.mouse-warining-view {
+  background: #dfbca5
+    linear-gradient(transparent 0%, transparent 50%, #ffffff 50%, #ffffff 100%);
+  position: relative;
+  width: 104rpx;
+  height: 176rpx;
+  border-radius: 200rpx;
+  background-size: 100% 200%;
+  -webkit-animation: colorSlide 5s linear infinite,
+    nudgeMouse 5s ease-out infinite;
+  animation: colorSlide 5s linear infinite, nudgeMouse 5s ease-out infinite;
+}
+.mouse-warining-view:before,
+.mouse-warining-view:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+.mouse-warining-view:before {
+  width: 92rpx;
+  height: 164rpx;
+  background-color: @four-color;
+  border-radius: 200rpx;
+}
+.mouse-warining-view:after {
+  background-color: #ffffff;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 100%;
+  -webkit-animation: trackBallSlide 5s linear infinite;
+  animation: trackBallSlide 5s linear infinite;
+}
+@-webkit-keyframes colorSlide {
+  0% {
+    background-position: 0% 100%;
+  }
+  20% {
+    background-position: 0% 0%;
+  }
+  21% {
+    background-color: @five-color;
+  }
+  29.99% {
+    background-color: #ffffff;
+    background-position: 0% 0%;
+  }
+  30% {
+    background-color: @five-color;
+    background-position: 0% 100%;
+  }
+  50% {
+    background-position: 0% 0%;
+  }
+  51% {
+    background-color: @five-color;
+  }
+  59% {
+    background-color: #ffffff;
+    background-position: 0% 0%;
+  }
+  60% {
+    background-color: @five-color;
+    background-position: 0% 100%;
+  }
+  80% {
+    background-position: 0% 0%;
+  }
+  81% {
+    background-color: @five-color;
+  }
+  90%,
+  100% {
+    background-color: #ffffff;
   }
 }
-
-.refresh-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+@keyframes colorSlide {
+  0% {
+    background-position: 0% 100%;
+  }
+  20% {
+    background-position: 0% 0%;
+  }
+  21% {
+    background-color: @five-color;
+  }
+  29.99% {
+    background-color: #ffffff;
+    background-position: 0% 0%;
+  }
+  30% {
+    background-color: @five-color;
+    background-position: 0% 100%;
+  }
+  50% {
+    background-position: 0% 0%;
+  }
+  51% {
+    background-color: @five-color;
+  }
+  59% {
+    background-color: #ffffff;
+    background-position: 0% 0%;
+  }
+  60% {
+    background-color: @five-color;
+    background-position: 0% 100%;
+  }
+  80% {
+    background-position: 0% 0%;
+  }
+  81% {
+    background-color: @five-color;
+  }
+  90%,
+  100% {
+    background-color: #ffffff;
+  }
 }
-.refresh-img-view {
-  width: 288rpx;
-  height: 112rpx;
+@-webkit-keyframes trackBallSlide {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+  6% {
+    opacity: 1;
+    -webkit-transform: scale(0.9) translateY(10rpx);
+    transform: scale(0.9) translateY(10rpx);
+  }
+  14% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(80rpx);
+    transform: scale(0.4) translateY(80rpx);
+  }
+  15%,
+  19% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(-40rpx);
+    transform: scale(0.4) translateY(-40rpx);
+  }
+  28%,
+  29.99% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+  30% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+  36% {
+    opacity: 1;
+    -webkit-transform: scale(0.9) translateY(10rpx);
+    transform: scale(0.9) translateY(10rpx);
+  }
+  44% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(80rpx);
+    transform: scale(0.4) translateY(80rpx);
+  }
+  45%,
+  49% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(-40rpx);
+    transform: scale(0.4) translateY(-40rpx);
+  }
+  58%,
+  59.99% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+  66% {
+    opacity: 1;
+    -webkit-transform: scale(0.9) translateY(10rpx);
+    transform: scale(0.9) translateY(10rpx);
+  }
+  74% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(80rpx);
+    transform: scale(0.4) translateY(80rpx);
+  }
+  75%,
+  79% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(-40rpx);
+    transform: scale(0.4) translateY(-40rpx);
+  }
+  88%,
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+}
+@keyframes trackBallSlide {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+  6% {
+    opacity: 1;
+    -webkit-transform: scale(0.9) translateY(10rpx);
+    transform: scale(0.9) translateY(10rpx);
+  }
+  14% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(80rpx);
+    transform: scale(0.4) translateY(80rpx);
+  }
+  15%,
+  19% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(-40rpx);
+    transform: scale(0.4) translateY(-40rpx);
+  }
+  28%,
+  29.99% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+  30% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+  36% {
+    opacity: 1;
+    -webkit-transform: scale(0.9) translateY(10rpx);
+    transform: scale(0.9) translateY(10rpx);
+  }
+  44% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(80rpx);
+    transform: scale(0.4) translateY(80rpx);
+  }
+  45%,
+  49% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(-40rpx);
+    transform: scale(0.4) translateY(-40rpx);
+  }
+  58%,
+  59.99% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+  66% {
+    opacity: 1;
+    -webkit-transform: scale(0.9) translateY(10rpx);
+    transform: scale(0.9) translateY(10rpx);
+  }
+  74% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(80rpx);
+    transform: scale(0.4) translateY(80rpx);
+  }
+  75%,
+  79% {
+    opacity: 0;
+    -webkit-transform: scale(0.4) translateY(-40rpx);
+    transform: scale(0.4) translateY(-40rpx);
+  }
+  88%,
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-40rpx);
+    transform: scale(1) translateY(-40rpx);
+  }
+}
+@-webkit-keyframes nudgeMouse {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  20% {
+    -webkit-transform: translateY(16rpx);
+    transform: translateY(16rpx);
+  }
+  30% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(16rpx);
+    transform: translateY(16rpx);
+  }
+  60% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  80% {
+    -webkit-transform: translateY(16rpx);
+    transform: translateY(16rpx);
+  }
+  90% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes nudgeMouse {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  20% {
+    -webkit-transform: translateY(16rpx);
+    transform: translateY(16rpx);
+  }
+  30% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(16rpx);
+    transform: translateY(16rpx);
+  }
+  60% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  80% {
+    -webkit-transform: translateY(16rpx);
+    transform: translateY(16rpx);
+  }
+  90% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes nudgeText {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  20% {
+    -webkit-transform: translateY(-4rpx);
+    transform: translateY(-4rpx);
+  }
+  30% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(-4rpx);
+    transform: translateY(-4rpx);
+  }
+  60% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  80% {
+    -webkit-transform: translateY(-4rpx);
+    transform: translateY(-4rpx);
+  }
+  90% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes nudgeText {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  20% {
+    -webkit-transform: translateY(-4rpx);
+    transform: translateY(-4rpx);
+  }
+  30% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(-4rpx);
+    transform: translateY(-4rpx);
+  }
+  60% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  80% {
+    -webkit-transform: translateY(-4rpx);
+    transform: translateY(-4rpx);
+  }
+  90% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes colorText {
+  21% {
+    color: @five-color;
+  }
+  30% {
+    color: #ffffff;
+  }
+  51% {
+    color: @five-color;
+  }
+  60% {
+    color: #ffffff;
+  }
+  81% {
+    color: @five-color;
+  }
+  90% {
+    color: #ffffff;
+  }
+}
+@keyframes colorText {
+  21% {
+    color: @five-color;
+  }
+  30% {
+    color: #ffffff;
+  }
+  51% {
+    color: @five-color;
+  }
+  60% {
+    color: #ffffff;
+  }
+  81% {
+    color: @five-color;
+  }
+  90% {
+    color: #ffffff;
+  }
+}
+.kipsong-user-base-view {
+  width: 100%;
+}
+.kipsong-inner-base-view {
+  width: 690rpx;
+  height: 240rpx;
+  margin: 0px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.kipsong-user-left-view {
+  width: 520rpx;
+  height: 140rpx;
+}
+.kipsong-img-right-view {
+  width: 140rpx;
+  height: 140rpx;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.kipsong-user-name-label-view {
+  font-size: 42rpx;
+  color: @five-color;
+  font-weight: 500;
+  margin-top: 20rpx;
+  display: flex;
+  // color: @five-color;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.kipsong-user-sex-img-view {
+  width: 40rpx;
+  height: 40rpx;
+  margin: 4rpx 0px 0px 10rpx;
+}
+.kipsong-user-sub-label-view {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: 300;
+  margin-top: 20rpx;
+}
+.kipsong-base-default-view {
+  width: 100%;
+}
+.kipsong-base-inner-view {
+  width: 690rpx;
+  margin: 0px auto;
+}
+.bottom-border {
+  border-bottom: 1rpx solid #efefef;
+}
+.kipsong-default-title-view {
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: @five-color;
+}
+.kipsong-defualt-text-view {
+  font-size: 28rpx;
+  color: #dedcdf;
+  font-weight: 300;
+  width: 100%;
+  padding-bottom: 40rpx;
+  text-indent: 58rpx;
+}
+.kipsong-default-lbale-view {
+  width: 100%;
+  height: 200rpx;
+  white-space: nowrap;
+}
+.kipsong-project-content-view {
+  display: inline-block;
+}
+.kipsong-project-item-label-view {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 40rpx;
+  display: column;
+  justify-content: center;
+  align-items: center;
+}
+.kipsong-project-img-view {
+  width: 100rpx;
+  height: 100rpx;
+  overflow: hidden;
+  margin: 0px auto;
+  border-radius: 50%;
+}
+.kipsong-project-item-text-view {
+  width: 100%;
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #ffffff;
+  font-size: 20rpx;
+  text-align: center;
+  margin-top: 10rpx;
+}
+.kipsong-user-wx-num-view{
+  font-size: 24rpx;
+ color: #ffffff;
 }
 </style>
-<wxs module="formatMoney" lang="babel">
 
-module.exports =  function formatMoney(num){
- if(parseFloat(num)>0){
-   return Number(num).toFixed(2)
- }else{
-   return num
- }
-}
-</wxs>
+
+
 <template>
   <div class="page" catchtouchmove="noop">
-    <scroll-view scroll-y style="height:{{scrollHeight}}px;" scroll-anchoring refresher-enabled refresher-triggered="{{bool}}" refresher-default-style="none"  @refresherrefresh="refresherrefresh">
-      <view slot="refresher" class="refresh-container" >
-        <view class="refresh-img-view">
-
+    <navbar :navigationBarBackgroundColor="navigationBarBackgroundColor" :navigationBarTitle="navigationBarTitle" :navigationBarTextStyle="navigationBarTextStyle" @handleTo="handleSwiperTo"></navbar>
+      <swiper duration="{{400}}" @change="changeSwiper" current="{{swiperIndex}}" class="swiper-view" style="" vertical="true">
+      <swiper-item class="swiper-column-view">
+        <view style="transform:rotate(180deg);">
+          <view class="mouse-warining-view"></view>
         </view>
-      </view>
+        <view class="text">这是一种罗塞蒂绿色</view>
+        <view class="abs-title-view">Just do it.</view>
+      </swiper-item>
+      <swiper-item class="swiper-item-view">
+        <view class="kipsong-user-base-view">
+          <view class="kipsong-inner-base-view">
+            <view class="kipsong-user-left-view">
+              <view class="kipsong-user-name-label-view">
+                <view>{{userInfo.name}}</view>
+                <view class="kipsong-user-sex-img-view">
+                  <image  v-if="userInfo.gender==1" style="width:100%;height:100%;" src="../../assets/images/gaqu-logo.png"/>
+                   <image v-if="userInfo.gender==0" style="width:100%;height:100%;" src="../../assets/images/gaqu-logo.png"/>
+                </view>
+              </view>
+              <view class="kipsong-user-sub-label-view">{{computedBirthday}}岁 {{userInfo.education}} {{userInfo.phone}}</view>
+            </view>
+            <view class="kipsong-img-right-view"> <image style="width:100%;height:100%;" src="../../assets/images/gaqu-logo.png"/></view>
+          </view>
+        </view>
+        <view class="kipsong-base-default-view" v-if="userInfo.description">
+          <view class="kipsong-base-inner-view">
+            <view class="kipsong-default-title-view">个人优势</view>
+            <view class="kipsong-defualt-text-view">{{userInfo.description}}</view>
+          </view>
+        </view>
 
+        <view class="kipsong-base-default-view">
+          <view class="kipsong-base-inner-view">
+            <view class="kipsong-default-title-view">我的项目</view>
+            <scroll-view scroll-x class="kipsong-default-lbale-view">
+              <view class="kipsong-project-content-view" v-for="(item,index) in projectData" @tap="handleMiniProject(index)">
+              <view class="kipsong-project-item-label-view" >
+                <view class="kipsong-project-img-view">
+                  <image  style="width:100%;height:100%;" src="{{item.imgUrl}}"/>
+                </view>
+                <view class="kipsong-project-item-text-view">{{item.name}}</view>
 
-    </scroll-view>
-    <view class="kipsong-bottom-submit-view" style="height:{{buttonViewHeight}}px;" @tap="handleJump">
-      <view class="kipsong-bottom-sumit-button-view">立即购买</view>
-    </view>
+              </view>
+              </view>
+            </scroll-view>
+          </view>
+        </view>
+
+        <view class="kipsong-base-default-view">
+          <view class="kipsong-base-inner-view">
+            <view class="kipsong-default-title-view">我的创业</view>
+            <scroll-view scroll-x class="kipsong-default-lbale-view">
+              <view class="kipsong-project-content-view" v-for="(item,index) in myProjectData" @tap="handleProject(index)">
+              <view class="kipsong-project-item-label-view" >
+                <view class="kipsong-project-img-view">
+                  <image  style="width:100%;height:100%;" src="{{item.imgUrl}}"/>
+                </view>
+                <view class="kipsong-project-item-text-view">{{item.name}}</view>
+              </view>
+              </view>
+            </scroll-view>
+          </view>
+        </view>
+      </swiper-item>
+
+    </swiper>
   </div>
 </template>
 
@@ -77,30 +685,121 @@ import {
   getClientType
 } from '@/utils/wx-system';
 
-import { getPackageInfo, getMemberInfo } from '@/api';
+// import { getPackageInfo, getMemberInfo } from '@/api';
 
 wepy.page({
   store,
   data: {
-    scrollHeight: getSysHeight(),
-    buttonViewHeight: 0,
-    bool: false,
-    isIphoneX: false
-  },
-  computed: {},
-  methods: {
-    refresherrefresh(e) {
-      this.bool = true;
-      setTimeout(() => {
-        this.bool = false;
-      }, 1000);
+    navigationBarBackgroundColor: '#194B47',
+    navigationBarTitle: '',
+    navigationBarTextStyle: 'white',
+    swiperIndex: 0,
+    swiperItemCount: 2,
+    userInfo: {
+      name: '刘家伟',
+      gender: '1',
+      birthday: '1992',
+      phone: '15262283592',
+      experience: 4,
+      education: '大专',
+      description:
+        '作为一枚前端开发人员具有丰富的用户体验、交互体验、产品经验。具有2年创业经历，从商业模式到产品0-1的迭代，有着更全面的视觉和经验。'
     },
-    noop() {},
-    handleJump(){
-      wx.navigateTo({
-        url: "./searchType"
+    projectData: [
+      {
+        id: 'gh_64fddc8c581e',
+        appId: 'wxd0e404d795ea6f80',
+        name: '	东唐西市',
+        description:
+          '将优质的产品和服务带给线下每一个用户，同时打通线上线下流量循环通道与电商平台形成统一的生态型新零售平台。',
+        imgUrl: '../../assets/images/gaqu-logo.png',
+        path: ''
+      },
+      {
+        id: 'gh_77bb47bfc5b1',
+        appId: 'wx664cd134b4cfc7e9',
+        name: '	惠享住',
+        description: '快速办理入住酒店。',
+        imgUrl: '../../assets/images/gaqu-logo.png',
+        path: ''
+      },
+      {
+        id: 'gh_1da335394fd6',
+        appId: 'wx706e79dbdb160347',
+        name: '运图交车宝',
+        description: '运图交车宝',
+        imgUrl: '../../assets/images/gaqu-logo.png',
+        path: ''
+      },
+      {
+        id: 'gh_023acd2e7cda',
+        appId: 'wxd5d5bf6b593d886e',
+        name: '要卖车',
+        description: '更好用的卖车助手',
+        imgUrl: '../../assets/images/gaqu-logo.png',
+        path: ''
+      }
+    ],
+    myProjectData: [
+      {
+        id: 'gh_a3397878f735',
+        appId: 'wx966ca4159ae73d63',
+        name: '鱼和喜',
+        description: '认真照顾自己，滋养精致生活',
+        imgUrl: '../../assets/images/gaqu-logo.png',
+        path: ''
+      },
+      {
+        id: 'gh_9192a3ef8d5d',
+        appId: 'wxfa814d82beb447b8',
+        name: '欢鱚食研室',
+        description: '认真照顾自己，滋养精致生活',
+        imgUrl: '../../assets/images/gaqu-logo.png',
+        path: 'pages/share/share1?userId=21&packageId=1&url=dashboard'
+      },
+      {
+        id: '',
+        appId: 'wxe422d7571f00750b',
+        name: '嘎趣跑跑',
+        description: '',
+        imgUrl: '../../assets/images/gaqu-logo.png',
+        path: ''
+      }
+    ]
+  },
+  computed: {
+    computedBirthday() {
+      return new Date().getFullYear() - this.userInfo.birthday || 0;
+    }
+  },
+  methods: {
+    changeSwiper(e) {
+      this.swiperIndex = e.$wx.detail.current;
+    },
+    handleSwiperTo(value) {
+      if (
+        this.swiperIndex + value != -1 &&
+        this.swiperIndex + value != this.swiperItemCount
+      ) {
+        this.swiperIndex += value;
+      }
+    },
+    handleMiniProject(index) {
+      const data = this.projectData[index];
+      wx.navigateToMiniProgram({
+        appId: data.appId,
+        path: data.path
       });
     },
+    handleProject(index) {
+      const data = this.myProjectData[index];
+      wx.navigateToMiniProgram({
+        appId: data.appId,
+        path: data.path
+      });
+    },
+    handleNextPage() {},
+    noop() {}
   },
   onShow() {},
   onLoad(option) {},
@@ -112,12 +811,18 @@ wepy.page({
     this.scrollHeight =
       getSysHeight() -
       (this.isIphoneX ? changeRPXToPX(200) : changeRPXToPX(168));
+  },
+  onShareAppMessage(res) {
+    return {
+      title: '欢迎戳进我的简历～',
+      path: 'pages/onload'
+    };
   }
 });
 </script>
 <config>
 {
-    navigationBarTitleText: 'demo',
+    navigationBarTitleText: '我的信息',
     backgroundColor:'#F7F9F9',
 
     usingComponents: {

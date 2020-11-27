@@ -1,5 +1,5 @@
 <style lang="less">
-@import url('../app.less');
+@import url('../assets/style/app.less');
 
 page {
   background-color: #f7f9f9;
@@ -36,7 +36,6 @@ page {
   justify-content: center;
 }
 .refresh-img-view {
-  width: 288rpx;
   height: 112rpx;
 }
 </style>
@@ -52,15 +51,18 @@ module.exports =  function formatMoney(num){
 </wxs>
 <template>
   <div class="page" catchtouchmove="noop">
+
     <scroll-view scroll-y style="height:{{scrollHeight}}px;" scroll-anchoring refresher-enabled refresher-triggered="{{bool}}" refresher-default-style="none"  @refresherrefresh="refresherrefresh">
       <view slot="refresher" class="refresh-container" >
         <view class="refresh-img-view">
-
+          123
         </view>
       </view>
-
-
     </scroll-view>
+
+
+
+
     <view class="kipsong-bottom-submit-view" style="height:{{buttonViewHeight}}px;" @tap="handleJump">
       <view class="kipsong-bottom-sumit-button-view">立即购买</view>
     </view>
@@ -77,7 +79,7 @@ import {
   getClientType
 } from '@/utils/wx-system';
 
-import { getPackageInfo, getMemberInfo } from '@/api';
+// import { getPackageInfo, getMemberInfo } from '@/api';
 
 wepy.page({
   store,
@@ -88,6 +90,7 @@ wepy.page({
     isIphoneX: false
   },
   computed: {},
+  watch: {},
   methods: {
     refresherrefresh(e) {
       this.bool = true;
@@ -97,9 +100,9 @@ wepy.page({
     },
     noop() {},
     handleJump(){
-      wx.navigateTo({
-        url: "./searchType"
-      });
+      // wx.reLaunch({
+      //   url: './myInfo'
+      // });
     },
   },
   onShow() {},
